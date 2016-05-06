@@ -1,2 +1,2 @@
-# stormpath-dotnet-documentation
-Stormpath documentation for ASP.NET
+# Stormpath ASP.NET Documentation
+Source files for the Stormpath ASP.NET documentation: http://docs.stormpath.com/dotnet/

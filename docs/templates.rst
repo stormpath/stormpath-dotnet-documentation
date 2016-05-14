@@ -4,13 +4,13 @@
 View Templates
 ==============
 
-This library has includes built-in views that are rendered automatically for HTML requests. You can use these views as-is, or you can customize them to your liking.
+This library includes built-in views that are rendered automatically for HTML requests. You can use these views as-is, or you can use custom views instead.
 
 
 Default Views
 -------------
 
-By default this library will use pre-built views for the following routes:
+By default, this library will use pre-built views for the following routes:
 
 * Login Page (``/login``)
 * Registration Page (``/register``)
@@ -18,7 +18,7 @@ By default this library will use pre-built views for the following routes:
 * Change Password Page (``/change``)
 * Email Verifiation Page (``/verify``)
 
-If you like the way the default views look, great! They work perfectly out of the box.
+In the case of the the :ref:`Registration <register_customizing_form>` and :ref:`Login <login_customizing_form>` routes, the forms can be customized to some extent simply by changing their configuration.
 
 
 .. _templates_custom_views:
@@ -28,14 +28,16 @@ Custom Views
 
 If you want to customize the look and feel of the views, you can set a route's ``view`` configuration option to the name of (or the path to) a Razor view available in your project.
 
-For example, to use a custom view for the login page, use this configuration (shown as YAML):
+For example, to use a custom view for the login route, use this configuration (shown as YAML):
 
 .. code-block:: yaml
 
-  stormpath:
-    web:
-      login:
-        view: "~/Views/Login/Login.cshtml"
+  web:
+    login:
+      view: "~/Views/Login/Login.cshtml"
+
+.. todo::
+  Add code.
 
 .. tip::
   It's also possible to set this configuration via code. See the :ref:`configuration` section.

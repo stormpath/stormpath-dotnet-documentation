@@ -11,7 +11,7 @@ your choices look like this:
   * If you are building a traditional web app or single page application, you
     should use **Cookie Authentication**.
 
-  * If you are building a mobile application, you should use the **OAuth2 Password Grant**.
+  * If you are building a mobile application, you should use the **OAuth 2.0 Password Grant**.
 
 .. todo::
   * If you are building an API service, you can use
@@ -33,7 +33,7 @@ To use cookie authentication, simply use the ``[Authorize]`` attribute on MVC or
 
 If the user is not logged in, they will be redirected to the built-in login route (``/login`` by default) to log in or register. After authenticating, they will be redirected back to the original route automatically.
 
-Behind the scenes, the Stormpath middleware creates OAuth2 Access and Refresh tokens for the user (via the Stormpath API), and stores them in secure, HTTP-only cookies. After the user has logged in, these cookies will be supplied on every request. The Stormpath middleware will assert that the Access Token is valid.  If the Access Token is expired, it will attempt to refresh it with the Refresh Token.
+Behind the scenes, the Stormpath middleware creates OAuth 2.0 Access and Refresh Tokens for the user (via the Stormpath API), and stores them in secure, HTTP-only cookies. After the user has logged in, these cookies will be supplied on every request. The Stormpath middleware will assert that the Access Token is valid.  If the Access Token is expired, it will attempt to refresh it with the Refresh Token.
 
 .. note::
     By default, the cookie names are ``access_token`` and ``refresh_token``. See :ref:`configuring_cookie_flags` if you want to change the defaults.
@@ -44,9 +44,7 @@ Behind the scenes, the Stormpath middleware creates OAuth2 Access and Refresh to
 Setting Token Expiration Time
 .............................
 
-If you need to change the expiration time of the Access Token or Refresh Token,
-please login to the `Stormpath Admin Console`_ and navigate to the OAuth Policy of
-your Stormpath Application. You can configure the time-to-live (TTL) for both Access and Refresh Tokens.
+If you need to change the expiration time of the Access Token or Refresh Token, log in to the `Stormpath Admin Console`_ and navigate to the OAuth Policy of your Stormpath Application. You can configure the time-to-live (TTL) for both Access and Refresh Tokens.
 
 
 .. _configuring_cookie_flags:
@@ -61,38 +59,43 @@ The default cookie configuration (in YAML) is:
 
 .. code-block:: yaml
 
-  stormpath:
-    web:
-      accessTokenCookie:
-        name: "access_token"
-        domain: null
-        httpOnly: true
-        path: null
-        secure: null
+  web:
+    accessTokenCookie:
+      name: "access_token"
+      domain: null
+      httpOnly: true
+      path: "/"
+      secure: null
 
-      refreshTokenCookie:
-        name: "refresh_token"
-        domain: null
-        httpOnly: true
-        path: null
-        secure: null
+    refreshTokenCookie:
+      name: "refresh_token"
+      domain: null
+      httpOnly: true
+      path: "/"
+      secure: null
 
 The flags behave as follows:
 
-+-------------+----------+----------------------------------------------------------+
-| Cookie Flag | Default  | Description                                              |
-+=============+==========+==========================================================+
-| domain      | ``null`` | Set if needed, e.g. "subdomain.mydomain.com".            |
-+-------------+----------+----------------------------------------------------------+
-| httpOnly    | ``true`` | ``true`` by default, do not disable without good reason  |
-|             |          | (exposes tokens to XSS  attacks).                        |
-+-------------+----------+----------------------------------------------------------+
-| path        | ``null`` | Set if needed, e.g. "/newapp". ``null`` equals ``/``.    |
-+-------------+----------+----------------------------------------------------------+
-| secure      | ``null`` | Will be ``true`` in HTTPS environments (as detected      |
-|             |          | by the request URI), unless explicitly set to            |
-|             |          | ``false`` (not recommended!).                            |
-+-------------+----------+----------------------------------------------------------+
+**name**
+
+Sets the name of the cookie stored in the user's browser.
+
+**domain**
+
+Default: ``null``. Set this if needed, e.g. "subdomain.mydomain.com".
+
+**httpOnly**
+
+Default: ``true``. Do not disable without a good reason (exposes tokens to XSS attacks).
+
+**path**
+
+Default: ``/``. Unless explicitly set, this property will observe the value at ``stormpath.web.basePath``.
+
+**secure**
+
+A value of ``null`` means that the Secure cookie flag will be automatically set to ``true`` in HTTPS environments (as detected by the request URI).
+This can be explicitly set, but we recommend leaving automatic detection on.
 
 
 .. _token_validation_strategy:
@@ -103,7 +106,7 @@ Token Validation Strategy
 When a request comes in to your server, the Stormpath middleware will use the Access Token
 and Refresh Token cookies to make an authentication decision. The first step is to validate the Access Token to make sure it hasn't been tampered with.
 
-There are two validation strategies: local validation (default) and Stormpath validation. Local validation does **not** make a network request to the Stormpath API, while Stormpath validation does make a network request and supports token revocation.
+There are two validation strategies: local validation (the default) and Stormpath validation. Local validation does **not** make a network request to the Stormpath API, while Stormpath validation does make a network request and supports token revocation.
 
 Both validation strategies follow the same pattern:
 
@@ -122,11 +125,10 @@ The validation strategy can be changed via :ref:`Configuration`. The default con
 
 .. code-block:: yaml
 
-  stormpath:
-    web:
-      oauth2:
-        password:
-          validationStrategy: "local"
+  web:
+    oauth2:
+      password:
+        validationStrategy: "local"
 
 .. warning::
 
@@ -350,7 +352,7 @@ The validation strategy can be changed via :ref:`Configuration`. The default con
 OAuth 2.0 Password Grant
 ------------------------
 
-This is the authentication strategy that you will want to use for mobile clients.
+This is the authentication strategy that you will want to use for mobile clients. This library supports this flow out-of-the-box.
 
 In this situation the end-user supplies their username and password to your
 mobile application.  The mobile application sends that username and password to
@@ -387,7 +389,7 @@ If the authentication is successful, your server will return a token response to
       "expires_in": 3600
     }
 
-Your mobile application should store the tokens in a secure location.
+Your mobile application should store the Access and Refresh Tokens in a secure location.
 
 .. note::
   By default the Access Token is valid for 1 hour and the Refresh Token is valid for 60 days. You can configure this in the Stormpath Admin Console; see :ref:`setting_token_expiration_time`.
@@ -404,7 +406,7 @@ Each subsequent request the mobile application makes to your |framework| applica
 
 When the Access Token expires, you can use the Refresh Token to obtain a new Access Token:
 
-..code-block:: http
+.. code-block:: http
 
     POST /oauth/token
     Host: myapi.com

@@ -3,13 +3,16 @@
 Request Objects
 =================
 
+When the Stormpath middleware is added to your |framework| request pipeline,
+these types will be available for each request:
+
+* Stormpath Client (``IClient``)
+* Stormpath Application (``IApplication``)
+* Current user's Stormpath Account (``IAccount``)
+
 .. only:: aspnetcore
 
-  When the Stormpath middleware is added to your ASP.NET Core request pipeline, these types will be available via dependency injection for each request:
-
-  * Stormpath Client (``IClient``)
-  * Stormpath Application (``IApplication``)
-  * Current user's Stormpath Account (``IAccount`` or ``Lazy<IAccount>``)
+  This library uses the built-in dependency injection mechanism in ASP.NET Core to provide these types.
 
   You can request any of these objects from the container using the ``[FromServices]`` attribute:
 
@@ -37,6 +40,9 @@ Stormpath Client
 
 The ``IClient`` type is the starting point of the `Stormpath .NET SDK`_. You can use it to perform any action against the Stormpath API.
 
+.. todo::
+  Add example using Client object.
+
 This type is available on every request.
 
 .. only:: aspnet
@@ -62,6 +68,9 @@ The ``IApplication`` type is a .NET representation of the Stormpath Application 
 
 This type is available on every request.
 
+.. todo::
+  Add example using Application objecdt.
+
 .. only:: aspnet
 
   .. todo::
@@ -81,12 +90,19 @@ The Stormpath middleware automatically checks incoming requests for authenticati
 .. tip::
   If you want to *require* authentication for a route or action, see the :ref:`authentication` section.
 
-.. only:: aspnetcore
+.. only:: aspnet or aspnetcore
 
   A subset of the user's Stormpath Account details are automatically placed in the ``ClaimsPrincipal`` object for the request. This makes it possible to quickly do things like update a view if the user is logged in:
 
-  .. literalinclude:: code/request_objects/aspnetcore/user_iprincipal.cshtml
+  .. only:: aspnetcore
+
+    .. literalinclude:: code/request_objects/aspnetcore/user_iprincipal.cshtml
       :language: html
+
+  .. only:: aspnet
+
+    .. todo::
+      Add code.
 
   The full list of claims populated in ``Context.User`` are:
 

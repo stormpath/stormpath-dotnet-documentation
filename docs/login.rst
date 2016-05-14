@@ -33,10 +33,9 @@ You could, for example, change the endpoint path by setting this configuration (
 
 .. code-block:: yaml
 
-  stormpath:
-    web:
-      login:
-        uri: "/logMeIn"
+  web:
+    login:
+      uri: "/logMeIn"
 
 You could also set this configuration via code:
 
@@ -56,7 +55,7 @@ You could also set this configuration via code:
     Add code
 
 
-See the :ref:`configuration` section for more details on how configuration works, or :ref:`login_default_configuration` to see the default values.
+See the :ref:`configuration` section for more details on how configuration works, or :ref:`login_default_configuration` to see the default values for this route.
 
 
 .. _login_customizing_form:
@@ -73,16 +72,24 @@ You can change the label and placeholder text that is displayed by changing the 
 
 .. code-block:: yaml
 
-  stormpath:
-    web:
-      login:
-        form:
-          fields:
-            login:
-              label: "Email"
-              placeholder: "you@yourdomain.com"
-            password:
-              placeholder: "Tip: Use a strong password!"
+  web:
+    login:
+      form:
+        fields:
+          login:
+            enabled: true
+            visible: true
+            label: "Email"
+            placeholder: "you@yourdomain.com"
+            required: true
+            type: "text"
+          password:
+            enabled: true
+            visible: true
+            label: "Password"
+            placeholder: "Tip: Use a strong password!"
+            required: true
+            type: "password"
 
 Or, through code:
 
@@ -101,6 +108,9 @@ Or, through code:
   .. todo::
     Add code
 
+.. note::
+  If you want to go beyond customizing the fields on the form, see :ref:`templates`.
+
 
 Next URI
 --------
@@ -109,10 +119,9 @@ If the login attempt is successful, the user will be redirected to ``/`` by defa
 
 .. code-block:: yaml
 
-  stormpath:
-    web:
-      login:
-        nextUri: "/dashboard"
+  web:
+    login:
+      nextUri: "/dashboard"
 
 
 .. todo::
@@ -231,7 +240,7 @@ Simply POST to the ``/login`` endpoint with the user's credentials:
 If the login attempt is successful, you will receive a 200 OK response and the
 session cookies will be set on the response. (See :ref:`cookie_authentication`)
 
-If an error occurs, you'll get an error response that looks like this:
+If an error occurs, you'll get an error response:
 
 .. code-block:: json
 
@@ -245,8 +254,7 @@ Getting the Form View Model
 ...........................
 
 By making a GET request to the login endpoint with the ``Accept:
-application/json`` set, you can retreive a JSON view model that describes the login
-form and the social account stores that are mapped to your Stormpath
+application/json`` header, you can retreive a JSON view model that describes the login form and the social account stores that are mapped to your Stormpath
 Application.
 
 Here's an example view model that shows you an application that has the default login form, and a mapped Google directory:
@@ -286,7 +294,7 @@ Here's an example view model that shows you an application that has the default 
     }
   }
 
-.. note::
+.. tip::
 
   You may have to explicitly tell your client library that you want a JSON
   response from the server. Not all libraries do this automatically. If the
@@ -306,32 +314,31 @@ For reference, the full default configuration for this route is shown as YAML be
 
 .. code-block:: yaml
 
-  stormpath:
-    web:
-      login:
-        enabled: true
-        uri: "/login"
-        nextUri: "/"
-        view: "login"
-        form:
-          fields:
-            login:
-              enabled: true
-              visible: true
-              label: "Username or Email"
-              placeholder: "Username or Email"
-              required: true
-              type: "text"
-            password:
-              enabled: true
-              visible: true
-              label: "Password"
-              placeholder: "Password"
-              required: true
-              type: "password"
-          fieldOrder:
-            - "login"
-            - "password"
+  web:
+    login:
+      enabled: true
+      uri: "/login"
+      nextUri: "/"
+      view: "login"
+      form:
+        fields:
+          login:
+            enabled: true
+            visible: true
+            label: "Username or Email"
+            placeholder: "Username or Email"
+            required: true
+            type: "text"
+          password:
+            enabled: true
+            visible: true
+            label: "Password"
+            placeholder: "Password"
+            required: true
+            type: "password"
+        fieldOrder:
+          - "login"
+          - "password"
 
 .. tip::
   You can also refer to the `Example Stormpath configuration`_ to see the entire default library configuration.

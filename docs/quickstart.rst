@@ -4,8 +4,7 @@
 Quickstart
 ==========
 
-This section walks you through adding Stormpath to a new |framework| project. By the end
-of this short page you'll have working login and registration features added to your application!
+This section walks you through adding Stormpath to a new |framework| project. By the end of this short tutorial you'll have working login and registration features added to your application!
 
 
 Create a Stormpath Account
@@ -17,10 +16,7 @@ If you haven't already, the first thing you'll want to do is `create a new Storm
 Create an API Key Pair
 ----------------------
 
-Once you've created a new account, you need to create an API key pair. A new
-API key pair is easily created by logging into your dashboard and clicking the
-"Create an API Key" button. This will generate a new API key for you, and
-prompt you to download your key pair.
+Once you've created a new account, you need to create an API key pair. These are your credentials for the Stormpath API. A new API key pair is easily created by logging into your dashboard and clicking the "Create an API Key" button. This will generate a new key pair for you, and prompt you to download the key pair as a file.
 
 .. note::
     Please keep the API key file safe!  This key and secret
@@ -46,14 +42,17 @@ To get you up and running quickly, all new Stormpath Tenants come with a Stormpa
 "My Application". You'll generally want one application per project, and we can
 use this default application to get started.
 
+.. note::
+  To learn more about Stormpath Applications, please see the
+  `Application Resource`_ section of our REST API documentation.
+
 Every Stormpath Application has unique URL, which looks something like this:
 
 .. code-block:: none
 
     https://api.stormpath.com/v1/applications/l0ngr4nd0mstr1ngh3r3
 
-From inside the `Admin Console`_, you can find the URL (called the REST URL or **href** in the Admin Console) by navigating to the
-"My Application" item in the Applications list.
+From inside the `Admin Console`_, you can find the URL (also called the REST URL or href) by navigating to the "My Application" item in the Applications list.
 
 We recommend saving this URL as an environment variable as well:
 
@@ -61,11 +60,8 @@ We recommend saving this URL as an environment variable as well:
 
   setx STORMPATH_APPLICATION_HREF "[your Application href]"
 
-To learn more about Stormpath Applications, please see the
-`Application Resource`_ section of our REST API documentation.
-
-Your default Application will also have a directory mapped to it. The
-Directory is where Stormpath stores accounts. To learn more, please see
+.. note::
+  Your default Application will also have a Stormpath Directory mapped to it. The Directory is where Stormpath stores accounts. To learn more, please see
 `Directory Resource`_ and `Modeling Your User Base`_.
 
 
@@ -97,7 +93,7 @@ Create a New Project
   3. In the New ASP.NET Project dialog, pick **Web Application** from **ASP.NET 5 Templates**.
   4. Click **Change Authentication** and pick **No Authentication**. (You'll be adding it yourself!)
 
-  If you prefer the command line, you can use the `ASP.NET Yeoman Generator`_ to scaffold a new project instead:
+  If you're on Mac or Linux, or just prefer the command line, you can use the `ASP.NET Yeoman Generator`_ to scaffold a new project instead:
 
   1. Run ``yo aspnet``.
   2. Pick the **Web Application Basic [without Membership and Authorization]** template. Done!
@@ -116,16 +112,18 @@ Create a New Project
 Install the Package
 -------------------
 
-Now that you've got a project and a Stormpath account all set up and ready to go, all that's
-left to do before we dive into the code is install the library package from NuGet.
+.. only:: aspnetcore
 
-This can be done with the NuGet Package Manager GUI, or using the Package Manager Console:
+  The ``Stormpath.AspNetCore`` package comes with everything you need to plug Stormpath into a ASP.NET Core project. It includes the `Stormpath .NET SDK`_, the Stormpath OWIN middleware, and pre-rendered views that work out of the box.
+
+The package can be installed with the NuGet Package Manager interface, or using the Package Manager Console:
 
 .. only:: aspnetcore
 
   .. code-block:: none
 
     PM> install-package Stormpath.AspNetCore
+
 
 .. only:: aspnet
 
@@ -146,7 +144,7 @@ Initialize the Middleware
 
 .. only:: aspnetcore
 
-  Once the package is installed, you can add it to your application in ``Startup.cs``. First, add the required services in ``ConfigureServices()``:
+  Once the package is installed, you need to add it to your application in ``Startup.cs``. First, add the required services in ``ConfigureServices()``:
 
   .. literalinclude:: code/quickstart/aspnetcore/configure_services.cs
       :language: csharp
@@ -156,25 +154,31 @@ Initialize the Middleware
   .. literalinclude:: code/quickstart/aspnetcore/configure.cs
       :language: csharp
 
+  .. note:: It's important that the Stormpath middleware is added **before** any middleware that needs to be protected, such as MVC!
+
 .. only:: aspnet
 
   .. todo::
     Add steps
+
+  .. note:: It's important that the Stormpath middleware is added **before** any middleware that needs to be protected, such as MVC!
 
 .. only:: nancy
 
   .. todo::
     Add steps
 
+  .. note:: It's important that the Stormpath middleware is added **before** any middleware that needs to be protected, such as <todo>!
+
+
 With this minimal configuration, the library will do the following:
 
-- Look for your Stormpath API credentials and Application URL in your local environment variables.
+- Look for Stormpath API credentials and Application URL in your local environment variables.
 
-- Fetch your Stormpath Application and all the data about its configuration and
-  account stores.
+- Discover your Stormpath Application and its configuration and account stores.
 
 - Attach the :ref:`default_features` to your application, such as the
-  login page and registration page.
+  login and registration routes.
 
 That's it, you're ready to go! Compile and run your project, and try navigating to these URLs:
 
@@ -192,8 +196,7 @@ account will be placed in the directory that is mapped to "My Application".
     By default, we don't require email verification for new accounts, but we
     highly recommend you use this workflow. See the :ref:`email_verification` section for details.
 
-There are many more features than login and registration. Continue to the
-next section to learn more!
+There are many more features beyond basic login and registration. You can jump to any of the features using the sidebar menu on the left, or continue to the next section to learn how to configure the library.
 
 
 .. _Admin Console: https://api.stormpath.com/login
@@ -202,3 +205,4 @@ next section to learn more!
 .. _ASP.NET Yeoman Generator: https://github.com/OmniSharp/generator-aspnet
 .. _Modeling Your User Base: https://docs.stormpath.com/rest/product-guide/latest/accnt_mgmt.html#modeling-your-user-base
 .. _ASP.NET Core (MVC6) Example Project: https://github.com/stormpath/stormpath-aspnetcore-example
+.. _Stormpath .NET SDK: https://github.com/stormpath/stormpath-sdk-dotnet

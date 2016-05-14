@@ -43,16 +43,15 @@ See the :ref:`oauth2_password_grant` topic in the Authentication section for a d
 Configuration Example
 .....................
 
-To change the token endpoint URI and use remote (Stormpath API) validation of the access token, use this configuration (shown in YAML):
+To change the token endpoint URI and use remote (Stormpath API) validation of the Access Token, use this configuration (shown in YAML):
 
 .. code-block:: yaml
 
-  stormpath:
-    web:
-      oauth2:
-        uri: "/api/token"
-        password:
-          validationStrategy: "stormpath"
+  web:
+    oauth2:
+      uri: "/api/token"
+      password:
+        validationStrategy: "stormpath"
 
 You could also set this configuration via code:
 
@@ -71,7 +70,7 @@ You could also set this configuration via code:
   .. todo::
     Add code
 
-See the :ref:`configuration` section for more details on how configuration works, or :ref:`oauth2_default_configuration` to see the default values.
+See the :ref:`configuration` section for more details on how configuration works, or :ref:`oauth2_default_configuration` to see the default values for this route.
 
 
 .. _oauth2_default_configuration:
@@ -85,18 +84,17 @@ For reference, the full default configuration for this route is shown as YAML be
 
 .. code-block:: yaml
 
-  stormpath:
-    web:
-      oauth2:
+  web:
+    oauth2:
+      enabled: true
+      uri: "/oauth/token"
+      client_credentials:
         enabled: true
-        uri: "/oauth/token"
-        client_credentials:
-          enabled: true
-          accessToken:
-            ttl: 3600
-        password:
-          enabled: true
-          validationStrategy: "local"
+        accessToken:
+          ttl: 3600
+      password:
+        enabled: true
+        validationStrategy: "local"
 
 .. tip::
   You can also refer to the `Example Stormpath configuration`_ to see the entire default library configuration.

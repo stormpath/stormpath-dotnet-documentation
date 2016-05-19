@@ -152,7 +152,8 @@ The package can be installed with the NuGet Package Manager interface, or using 
     PM> install-package Stormpath.AspNetCore
 
   .. todo::
-    Include *nix-friendly instructions.
+
+    Include Linux-friendly instructions.
 
 .. only:: aspnet
 

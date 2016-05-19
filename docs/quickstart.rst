@@ -61,8 +61,7 @@ We recommend saving this URL as an environment variable as well:
   setx STORMPATH_APPLICATION_HREF "[your Application href]"
 
 .. note::
-  Your default Application will also have a Stormpath Directory mapped to it. The Directory is where Stormpath stores accounts. To learn more, please see
-`Directory Resource`_ and `Modeling Your User Base`_.
+  Your default Application will also have a Stormpath Directory mapped to it. The Directory is where Stormpath stores accounts. To learn more, please see `Directory Resource`_ and `Modeling Your User Base`_.
 
 
 Now that your API credentials and Stormpath Application are ready, you're set to plug Stormpath into your project!

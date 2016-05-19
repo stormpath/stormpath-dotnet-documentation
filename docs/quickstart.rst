@@ -22,25 +22,31 @@ Once you've created a new account, you need to create an API key pair. These are
     Please keep the API key file safe!  This key and secret
     allows you to make Stormpath API requests, and should be properly protected.
 
-We recommend storing your API credentials in local environment variables. Once you've downloaded your ``apiKey.properties`` file, open it in Notepad or your favorite text editor. Find the **API Key ID** and **API Key Secret** and run these commands in PowerShell (or your shell of choice):
+We recommend storing your API credentials in local environment variables. Once you've downloaded your ``apiKey.properties`` file, open it in your favorite text editor, and find the **API Key ID** and **API Key Secret** values.
+
+In a bash-like shell, you can set environment variables by running these commands:
+
+.. code-block:: bash
+
+    export STORMPATH_CLIENT_APIKEY_ID=your_id_here
+    export STORMPATH_CLIENT_APIKEY_SECRET=your_secret_here
+
+On Windows, the commands are:
 
 .. code-block:: powershell
 
-  setx STORMPATH_CLIENT_APIKEY_ID "[value from properties file]"
-  setx STORMPATH_CLIENT_APIKEY_SECRET "[value from properties file]"
+    setx STORMPATH_CLIENT_APIKEY_ID your_id_here
+    setx STORMPATH_CLIENT_APIKEY_SECRET your_secret_here
 
-.. note::
+.. tip::
 
-  You can also load your credentials straight from the ``apiKey.properties`` file, or
-  include them in your project code. See the :ref:`configuration` section for all the details.
+  You can also load your credentials straight from the ``apiKey.properties`` file, or include them in your project code. See the :ref:`configuration` section for more information.
 
 
 Find Your Stormpath Application
 -------------------------------
 
-To get you up and running quickly, all new Stormpath Tenants come with a Stormpath Application called
-"My Application". You'll generally want one application per project, and we can
-use this default application to get started.
+To get you up and running quickly, all new Stormpath Tenants come with a Stormpath Application called "My Application". You'll generally want one application per project, and we can use this default application to get started.
 
 .. note::
   To learn more about Stormpath Applications, please see the
@@ -56,15 +62,18 @@ From inside the `Admin Console`_, you can find the URL (also called the REST URL
 
 We recommend saving this URL as an environment variable as well:
 
+.. code-block:: bash
+
+    export STORMPATH_APPLICATION_HREF=your_app_href
+
+Or, on Windows:
+
 .. code-block:: powershell
 
-  setx STORMPATH_APPLICATION_HREF "[your Application href]"
-
-.. note::
-  Your default Application will also have a Stormpath Directory mapped to it. The Directory is where Stormpath stores accounts. To learn more, please see `Directory Resource`_ and `Modeling Your User Base`_.
+    setx STORMPATH_APPLICATION_HREF your_app_href
 
 
-Now that your API credentials and Stormpath Application are ready, you're set to plug Stormpath into your project!
+Now that your API credentials and Stormpath Application are set, you're ready to plug Stormpath into your project!
 
 
 Example Projects
@@ -142,6 +151,8 @@ The package can be installed with the NuGet Package Manager interface, or using 
 
     PM> install-package Stormpath.AspNetCore
 
+  .. todo::
+    Include *nix-friendly instructions.
 
 .. only:: aspnet
 

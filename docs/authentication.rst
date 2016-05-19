@@ -28,7 +28,7 @@ Single Page Application (such as Angular/React), this library will handle cookie
 
 .. only:: aspnetcore or aspnet
 
-  To use cookie authentication, simply use the ``[Authorize]`` attribute on MVC or Web API routes:
+  To use cookie authentication, simply use the ``[Authorize]`` attribute on your MVC or Web API routes:
 
   .. only:: aspnetcore
 
@@ -94,26 +94,15 @@ The default cookie configuration (in YAML) is:
 
 The flags behave as follows:
 
-**name**
+* **name** - Controls the name of the cookie stored in the user's browser.
 
-Sets the name of the cookie stored in the user's browser.
+* **domain** - Set this if needed; e.g. "subdomain.mydomain.com". (Default: ``null``.)
 
-**domain**
+* **httpOnly** - Controls the ``HttpOnly`` flag on the cookie. Be careful if changing this, because ``false`` exposes cookies to XSS attacks. (Default: ``true``.)
 
-Default: ``null``. Set this if needed, e.g. "subdomain.mydomain.com".
+* **path** - Unless explicitly set, this property will inherit ``stormpath.web.basePath``. (Default: ``/``.)
 
-**httpOnly**
-
-Default: ``true``. Do not disable without a good reason (exposes tokens to XSS attacks).
-
-**path**
-
-Default: ``/``. Unless explicitly set, this property will observe the value at ``stormpath.web.basePath``.
-
-**secure**
-
-A value of ``null`` means that the Secure cookie flag will be automatically set to ``true`` in HTTPS environments (as detected by the request URI).
-This can be explicitly set, but we recommend leaving automatic detection on.
+* **secure** - Controls the ``Secure`` flag on the cookie. A value of ``null`` means that the Secure flag will be automatically set in HTTPS environments (as detected by the request URI). This can be explicitly set, but we recommend leaving automatic detection on. (Default: ``null``.)
 
 
 .. _token_validation_strategy:
@@ -370,17 +359,14 @@ The validation strategy can be changed via :ref:`Configuration`. The default con
 OAuth 2.0 Password Grant
 ------------------------
 
-This is the authentication strategy that you will want to use for mobile clients. This library supports this flow out-of-the-box.
+This is the authentication strategy that you'll want to use for mobile clients, and it's supported this flow out-of-the-box.
 
-In this situation the end-user supplies their username and password to your
+In this scenario, the end-user supplies their username and password to your
 mobile application.  The mobile application sends that username and password to
 your |framework| server, which then verifies the password with Stormpath.
 
 If the account is valid and the password is correct, Stormpath will generate
-an Access and Refresh Token for the user.  Your server gets these tokens from Stormpath
-and then sends them down to your mobile application.
-
-The mobile application then stores the tokens in a secure location, and
+an Access and Refresh Token for the user.  Your server gets these tokens from Stormpath and then sends them down to your mobile application. The mobile application then stores the tokens in a secure location, and
 uses them for future requests to your |framework| application.
 
 When a user wants to login to your mobile application, the mobile application
@@ -410,7 +396,7 @@ If the authentication is successful, your server will return a token response to
 Your mobile application should store the Access and Refresh Tokens in a secure location.
 
 .. note::
-  By default the Access Token is valid for 1 hour and the Refresh Token is valid for 60 days. You can configure this in the Stormpath Admin Console; see :ref:`setting_token_expiration_time`.
+  By default the Access Token is valid for 1 hour, and the Refresh Token is valid for 60 days. You can configure this in the Stormpath Admin Console; see :ref:`setting_token_expiration_time`.
 
 Each subsequent request the mobile application makes to your |framework| application should include the Access Token as a ``Bearer`` header:
 
@@ -420,7 +406,6 @@ Each subsequent request the mobile application makes to your |framework| applica
     Host: myapi.com
     Accept: application/json
     Authorization: Bearer eyJraWQiOiI2Nl...
-    ...
 
 When the Access Token expires, you can use the Refresh Token to obtain a new Access Token:
 

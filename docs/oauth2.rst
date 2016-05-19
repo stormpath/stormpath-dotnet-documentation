@@ -7,7 +7,7 @@ If you are building a mobile application, and don't want to (or can't) use cooki
 
 By default, this library will provide a POST route at ``/oauth/token``. Simply make a POST request to this URI with the user's credentials to generate tokens for the user. You can change this URI, or disable the feature entirely if you wish.
 
-This topic describes how to configure the OAuth 2.0 API endpoint. For details on how to use it, see the :ref:`authentication` section.
+This topic describes how to configure the OAuth 2.0 API endpoint. For details on how to use it, see the :ref:`oauth2_password_grant` section.
 
 
 Configuration Options

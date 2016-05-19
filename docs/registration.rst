@@ -72,7 +72,7 @@ The registration form will render these fields by default, and they will be requ
 You can customize the form by simply changing the configuration. For example, while email and password will always be required, you could make first and last name optional. Or, you can ask the user for both an email address and a username. You can also specify your own custom fields, no code required!
 
 .. note::
-  If you want to go beyond customizing the fields on the form, see :ref:`templates`.
+  If you want to use a custom view for the form, see :ref:`templates`.
 
 Each field item in the ``stormpath.web.register.form.fields`` collection has these configurable properties:
 

@@ -98,7 +98,7 @@ You could also set this configuration via code:
 
 .. only:: nancy
 
-  .. literalinclude:: code/password_reset/nancy/configure_uris.cs
+  .. .literalinclude:: code/password_reset/nancy/configure_uris.cs
     :language: csharp
 
 See the :ref:`configuration` section for more details on how configuration works, or :ref:`password_reset_default_configuration` to see the default values for these routes.

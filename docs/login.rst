@@ -51,7 +51,7 @@ You could also set this configuration via code:
 
 .. only:: nancy
 
-  .. literalinclude:: code/login/nancy/configure_uri.cs
+  .. .literalinclude:: code/login/nancy/configure_uri.cs
     :language: csharp
 
 
@@ -105,7 +105,7 @@ Or, through code:
 
 .. only:: nancy
 
-  .. literalinclude:: code/login/nancy/configure_labels.cs
+  .. .literalinclude:: code/login/nancy/configure_labels.cs
     :language: csharp
 
 .. note::

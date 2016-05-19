@@ -73,9 +73,10 @@ Example Projects
 If you're feeling lazy (as all good programmers should!), you can download one of our example projects to get up and running super fast:
 
 - `ASP.NET Core 1.0 MVC Example Project`_
+- `ASP.NET MVC 5 Example Project`_
 
 .. todo::
-  Add ASP.NET and Nancy example projects when available
+  Add Nancy example project when available
 
 
 Create a New Project
@@ -228,5 +229,6 @@ There are many more features beyond basic login and registration. You can jump t
 .. _Directory Resource: https://docs.stormpath.com/rest/product-guide/latest/reference.html#directory
 .. _ASP.NET Yeoman Generator: https://github.com/OmniSharp/generator-aspnet
 .. _Modeling Your User Base: https://docs.stormpath.com/rest/product-guide/latest/accnt_mgmt.html#modeling-your-user-base
-.. _ASP.NET Core (MVC6) Example Project: https://github.com/stormpath/stormpath-aspnetcore-example
+.. _ASP.NET Core 1.0 MVC Example Project: https://github.com/stormpath/stormpath-aspnetcore-example
+.. _ASP.NET MVC 5 Example Project: https://github.com/stormpath/stormpath-aspnet-example
 .. _Stormpath .NET SDK: https://github.com/stormpath/stormpath-sdk-dotnet

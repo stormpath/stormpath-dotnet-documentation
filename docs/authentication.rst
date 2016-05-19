@@ -43,9 +43,10 @@ Single Page Application (such as Angular/React), this library will handle cookie
 .. only:: nancy
 
   .. todo::
+
     Description.
 
-  .. literalinclude:: code/authentication/nancy/protected_route.cs
+  .. .literalinclude:: code/authentication/nancy/protected_route.cs
       :language: csharp
 
 If the user is not logged in, they will be redirected to the built-in login route (``/login`` by default) to log in or register. After authenticating, they will be redirected back to the original route automatically.

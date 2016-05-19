@@ -124,7 +124,7 @@ can do so when initializing the middleware:
 
 .. only:: nancy
 
-  .. literalinclude:: code/configuration/nancy/inline_config.cs
+  .. .literalinclude:: code/configuration/nancy/inline_config.cs
       :language: csharp
 
 You can also use an anonymous object with the same (case-insensitive) names:
@@ -141,7 +141,7 @@ You can also use an anonymous object with the same (case-insensitive) names:
 
 .. only:: nancy
 
-  .. literalinclude:: code/configuration/nancy/anonymous_inline_config.cs
+  .. .literalinclude:: code/configuration/nancy/anonymous_inline_config.cs
     :language: csharp
 
 Both of these examples will use the Stormpath Application called "My Application" and disable the default ``/register`` route.
@@ -207,7 +207,7 @@ this configuration in code:
 
 .. only:: nancy
 
-  .. literalinclude:: code/configuration/nancy/disable_default_features.cs
+  .. .literalinclude:: code/configuration/nancy/disable_default_features.cs
       :language: csharp
 
 The equivalent ``stormpath.yaml`` looks like this:
@@ -262,7 +262,7 @@ It's possible to disable either of these modes by changing the values in ``storm
 
 .. only:: nancy
 
-  .. literalinclude:: code/configuration/nancy/disable_html_produces.cs
+  .. .literalinclude:: code/configuration/nancy/disable_html_produces.cs
       :language: csharp
 
 Stormpath Client Options
@@ -288,7 +288,7 @@ For example, to hardcode the Stormpath API credentials (not recommended!), you c
 
 .. only:: nancy
 
-  .. literalinclude:: code/configuration/nancy/api_credentials.cs
+  .. .literalinclude:: code/configuration/nancy/api_credentials.cs
       :language: csharp
 
 The Stormpath Client constructor ignores the ``stormpath.web`` node of the configuration. For more information about setting options on the SDK Client object, please see the

@@ -36,7 +36,7 @@ these types will be available for each request:
   .. todo::
     Add detail here.
 
-  .. literalinclude:: code/request_objects/nancy/extension_methods.cs
+  .. .literalinclude:: code/request_objects/nancy/extension_methods.cs
     :language: csharp
 
 
@@ -71,7 +71,7 @@ For example, to search for an account by email address:
 
 .. only:: aspnetcore
 
-  .. literalinclude:: code/request_objects/nancy/injecting_application.cs
+  .. .literalinclude:: code/request_objects/nancy/injecting_application.cs
     :language: csharp
 
 
@@ -137,7 +137,7 @@ The Stormpath middleware automatically checks incoming requests for authenticati
   .. todo::
     Add description
 
-  .. literalinclude:: code/request_objects/nancy/injecting_user.cs
+  .. .literalinclude:: code/request_objects/nancy/injecting_user.cs
       :language: csharp
 
 If you want to require authentication on certain controllers or routes, jump to the :ref:`authentication` section.
@@ -162,7 +162,7 @@ To update the user's password, for example:
 
 .. only:: nancy
 
-  .. literalinclude:: code/request_objects/nancy/update_user_password.cs
+  .. .literalinclude:: code/request_objects/nancy/update_user_password.cs
       :language: csharp
 
 There are many more things you can do with the .NET SDK. Check out the `Stormpath .NET API documentation`_ to learn more!

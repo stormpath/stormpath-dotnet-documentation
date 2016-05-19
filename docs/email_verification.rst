@@ -80,7 +80,7 @@ You could also set this configuration via code:
 
 .. only:: nancy
 
-  .. literalinclude:: code/email_verification/nancy/configure_uri.cs
+  .. .literalinclude:: code/email_verification/nancy/configure_uri.cs
     :language: csharp
 
 

@@ -82,7 +82,7 @@ If you're feeling lazy (as all good programmers should!), you can download one o
 Create a New Project
 --------------------
 
-.. note:: If you are adding Stormpath to an existing application, skip to the next section.
+If you are adding Stormpath to an existing application, skip to the next section!
 
 .. only:: aspnetcore
 
@@ -152,6 +152,10 @@ The package can be installed with the NuGet Package Manager interface, or using 
   .. todo::
     Remove -pre
 
+  .. note::
+
+    Older versions of NuGet will sometimes fail to install the package. If you get an error, make sure `NuGet is up to date <https://docs.nuget.org/consume/installing-nuget#updating-nuget-in-visual-studio>`_.
+
 
 .. only:: nancy
 
@@ -183,7 +187,7 @@ Initialize the Middleware
 
   Once the package is installed, you need to add it to your OWIN startup class (usually called ``Startup.cs``).
 
-  .. note::
+  .. tip::
 
     If you don't have a ``Startup.cs`` file, right-click on your project and select **Add - OWIN Startup class**.
 

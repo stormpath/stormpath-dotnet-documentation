@@ -119,13 +119,13 @@ can do so when initializing the middleware:
 
 .. only:: aspnet
 
-  .. todo::
-    Add code.
+  .. literalinclude:: code/configuration/aspnet/inline_config.cs
+      :language: csharp
 
 .. only:: nancy
 
-  .. todo::
-    Add code.
+  .. literalinclude:: code/configuration/nancy/inline_config.cs
+      :language: csharp
 
 You can also use an anonymous object with the same (case-insensitive) names:
 
@@ -136,13 +136,13 @@ You can also use an anonymous object with the same (case-insensitive) names:
 
 .. only:: aspnet
 
-  .. todo::
-    Add code.
+  .. literalinclude:: code/configuration/aspnet/anonymous_inline_config.cs
+    :language: csharp
 
 .. only:: nancy
 
-  .. todo::
-    Add code.
+  .. literalinclude:: code/configuration/nancy/anonymous_inline_config.cs
+    :language: csharp
 
 Both of these examples will use the Stormpath Application called "My Application" and disable the default ``/register`` route.
 
@@ -202,13 +202,13 @@ this configuration in code:
 
 .. only:: aspnet
 
-  .. todo::
-    Add code
+  .. literalinclude:: code/configuration/aspnet/disable_default_features.cs
+      :language: csharp
 
 .. only:: nancy
 
-  .. todo::
-    Add code
+  .. literalinclude:: code/configuration/nancy/disable_default_features.cs
+      :language: csharp
 
 The equivalent ``stormpath.yaml`` looks like this:
 
@@ -257,13 +257,13 @@ It's possible to disable either of these modes by changing the values in ``storm
 
 .. only:: aspnet
 
-  .. todo::
-    Add code
+  .. literalinclude:: code/configuration/aspnet/disable_html_produces.cs
+      :language: csharp
 
 .. only:: nancy
 
-  .. todo::
-    Add code
+  .. literalinclude:: code/configuration/nancy/disable_html_produces.cs
+      :language: csharp
 
 Stormpath Client Options
 ------------------------
@@ -276,8 +276,20 @@ Any options you set when initializing the Stormpath middleware library are also 
 
 For example, to hardcode the Stormpath API credentials (not recommended!), you could use this configuration:
 
-.. literalinclude:: code/configuration/aspnetcore/api_credentials.cs
-    :language: csharp
+.. only:: aspnetcore
+
+  .. literalinclude:: code/configuration/aspnetcore/api_credentials.cs
+      :language: csharp
+
+.. only:: aspnet
+
+  .. literalinclude:: code/configuration/aspnet/api_credentials.cs
+      :language: csharp
+
+.. only:: nancy
+
+  .. literalinclude:: code/configuration/nancy/api_credentials.cs
+      :language: csharp
 
 The Stormpath Client constructor ignores the ``stormpath.web`` node of the configuration. For more information about setting options on the SDK Client object, please see the
 `.NET SDK documentation <https://docs.stormpath.com/dotnet/api/html/M_Stormpath_SDK_Client_IClientBuilder_SetConfiguration.htm>`_.

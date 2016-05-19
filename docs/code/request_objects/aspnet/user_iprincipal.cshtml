@@ -1,0 +1,4 @@
+@if (Context.User.Identity.IsAuthenticated)
+{
+    <p>Hello, <b>@Context.User.Identity.Name</b>!</p>
+}

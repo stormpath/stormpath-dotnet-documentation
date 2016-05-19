@@ -46,13 +46,13 @@ You could also set this configuration via code:
 
 .. only:: aspnet
 
-  .. todo::
-    Add code
+  .. literalinclude:: code/login/aspnet/configure_uri.cs
+    :language: csharp
 
 .. only:: nancy
 
-  .. todo::
-    Add code
+  .. literalinclude:: code/login/nancy/configure_uri.cs
+    :language: csharp
 
 
 See the :ref:`configuration` section for more details on how configuration works, or :ref:`login_default_configuration` to see the default values for this route.
@@ -100,13 +100,13 @@ Or, through code:
 
 .. only:: aspnet
 
-  .. todo::
-    Add code
+  .. literalinclude:: code/login/aspnet/configure_labels.cs
+    :language: csharp
 
 .. only:: nancy
 
-  .. todo::
-    Add code
+  .. literalinclude:: code/login/nancy/configure_labels.cs
+    :language: csharp
 
 .. note::
   If you want to go beyond customizing the fields on the form, see :ref:`templates`.

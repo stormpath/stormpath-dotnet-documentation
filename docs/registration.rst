@@ -46,13 +46,13 @@ You could also set this configuration via code:
 
 .. only:: aspnet
 
-  .. todo::
-    Add code
+  .. literalinclude:: code/registration/aspnet/configure_uri.cs
+    :language: csharp
 
 .. only:: nancy
 
-  .. todo::
-    Add code
+  .. literalinclude:: code/registration/nancy/configure_uri.cs
+    :language: csharp
 
 See the :ref:`configuration` section for more details on how configuration works, or :ref:`register_default_configuration` to see the default values for this route.
 
@@ -119,13 +119,13 @@ Or, in code:
 
 .. only:: aspnet
 
-  .. todo::
-    Add code
+  .. literalinclude:: code/registration/aspnet/configure_form_fields_required.cs
+    :language: csharp
 
 .. only:: nancy
 
-  .. todo::
-    Add code
+  .. literalinclude:: code/registration/nancy/configure_form_fields_required.cs
+    :language: csharp
 
 If you would like to remove a field from the form entirely, set the ``visible`` or ``enabled`` properties to ``false``. The behavior is slightly different:
 
@@ -168,13 +168,13 @@ Or, in code:
 
 .. only:: aspnet
 
-  .. todo::
-    Add code
+  .. literalinclude:: code/registration/aspnet/configure_custom_form_field.cs
+    :language: csharp
 
 .. only:: nancy
 
-  .. todo::
-    Add code
+  .. literalinclude:: code/registration/nancy/configure_custom_form_field.cs
+    :language: csharp
 
 
 Changing Field Order
@@ -203,13 +203,13 @@ Or, in code:
 
 .. only:: aspnet
 
-  .. todo::
-    Add code
+  .. literalinclude:: code/registration/aspnet/configure_field_order.cs
+    :language: csharp
 
 .. only:: nancy
 
-  .. todo::
-    Add code
+  .. literalinclude:: code/registration/nancy/configure_field_order.cs
+    :language: csharp
 
 Any visible fields that are omitted from the ``fieldOrder`` array will be placed at the end of the form.
 

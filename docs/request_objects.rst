@@ -3,7 +3,7 @@
 Request Objects
 =================
 
-When the Stormpath middleware is added to your |framework| request pipeline,
+When the Stormpath middleware is added to your |framework| application pipeline,
 these types will be available for each request:
 
 * Stormpath Client (``IClient``)
@@ -26,13 +26,18 @@ these types will be available for each request:
 
 .. only:: aspnet
 
-  .. todo::
-    Add detail about extension methods here.
+  In any MVC action or Web API route, you can use the `GetStormpath` extension methods on the `Request` object to retrieve these types:
+
+  .. literalinclude:: code/request_objects/aspnet/extension_methods.cs
+    :language: csharp
 
 .. only:: nancy
 
   .. todo::
     Add detail here.
+
+  .. literalinclude:: code/request_objects/nancy/extension_methods.cs
+    :language: csharp
 
 
 Stormpath Client
@@ -40,25 +45,11 @@ Stormpath Client
 
 The ``IClient`` type is the starting point of the `Stormpath .NET SDK`_. You can use it to perform any action against the Stormpath API.
 
-.. todo::
-  Add example using Client object.
-
-This type is available on every request.
-
-.. only:: aspnet
-
-  .. todo::
-
-    Add detail about extension methods here.
-
-.. only:: nancy
-
-  .. todo::
-
-    Add detail here.
-
 .. note::
   For more information about the Client object, see the `Stormpath .NET API documentation`_.
+
+.. todo::
+  Update this link to the One Product Guide when done.
 
 
 Stormpath Application
@@ -66,20 +57,22 @@ Stormpath Application
 
 The ``IApplication`` type is a .NET representation of the Stormpath Application associated with your |framework| application. You can use this object to perform actions like creating and searching for user accounts programmatically.
 
-This type is available on every request.
+For example, to search for an account by email address:
 
-.. todo::
-  Add example using Application objecdt.
+.. only:: aspnetcore
+
+  .. literalinclude:: code/request_objects/aspnetcore/injecting_application.cs
+    :language: csharp
 
 .. only:: aspnet
 
-  .. todo::
-    Add detail about extension methods here.
+  .. literalinclude:: code/request_objects/aspnet/injecting_application.cs
+    :language: csharp
 
-.. only:: nancy
+.. only:: aspnetcore
 
-  .. todo::
-    Add detail here.
+  .. literalinclude:: code/request_objects/nancy/injecting_application.cs
+    :language: csharp
 
 
 Current User Account
@@ -101,8 +94,8 @@ The Stormpath middleware automatically checks incoming requests for authenticati
 
   .. only:: aspnet
 
-    .. todo::
-      Add code.
+    .. literalinclude:: code/request_objects/aspnet/user_iprincipal.cshtml
+      :language: html
 
   The full list of claims populated in ``Context.User`` are:
 
@@ -113,32 +106,39 @@ The Stormpath middleware automatically checks incoming requests for authenticati
   * ``ClaimTypes.Surname``
   * ``"FullName"``
 
-  .. only:: aspnetcore
+.. only:: aspnetcore
 
-    If you want full access to the Stormpath ``IAccount`` object, inject a ``Lazy<IAccount>`` in your controller:
+  If you want full access to the Stormpath ``IAccount`` object, inject a ``Lazy<IAccount>`` in your controller:
 
-    .. literalinclude:: code/request_objects/aspnetcore/injecting_user.cs
-        :language: csharp
+  .. literalinclude:: code/request_objects/aspnetcore/injecting_user.cs
+      :language: csharp
 
-    If the request is unauthenticated, the lazy value will resolve to ``null``. If the request represents a valid user, you'll get an ``IAccount`` instance representing the user's Stormpath Account.
+  If the request is unauthenticated, the lazy value will resolve to ``null``. If the request represents a valid user, you'll get an ``IAccount`` instance representing the user's Stormpath Account.
 
-    .. tip::
-      If your controller or action will *always* be authenticated (see the :ref:`authentication` section), you can drop the wrapper and inject ``IAccount`` directly. Don't do this on routes that can be accessed anonymously!
+  .. tip::
+    If your controller or action will *always* be authenticated (see the :ref:`authentication` section), you can drop the wrapper and inject ``IAccount`` directly. Don't do this on routes that can be accessed anonymously!
 
-    You can also use the ``@inject`` directive to do the same injection directly in your views:
+  You can also use the ``@inject`` directive to do the same injection directly in your views:
 
-    .. literalinclude:: code/request_objects/aspnetcore/injecting_user_view.cshtml
-        :language: html
+  .. literalinclude:: code/request_objects/aspnetcore/injecting_user_view.cshtml
+      :language: html
 
 .. only:: aspnet
 
-  .. todo::
-    Add detail here.
+  If you want full access to the Stormpath ``IAccount`` object, use the ``GetStormpathAccount()`` method in your MVC or Web API controller:
+
+  .. literalinclude:: code/request_objects/aspnet/injecting_user.cs
+      :language: csharp
+
+  If the request is unauthenticated, the value will be ``null``. If the request represents a valid user, you'll get an ``IAccount`` instance representing the user's Stormpath Account.
 
 .. only:: nancy
 
   .. todo::
-    Is this relevant?
+    Add description
+
+  .. literalinclude:: code/request_objects/nancy/injecting_user.cs
+      :language: csharp
 
 If you want to require authentication on certain controllers or routes, jump to the :ref:`authentication` section.
 
@@ -157,13 +157,13 @@ To update the user's password, for example:
 
 .. only:: aspnet
 
-  .. todo::
-    Add code
+  .. literalinclude:: code/request_objects/aspnet/update_user_password.cs
+      :language: csharp
 
 .. only:: nancy
 
-  .. todo::
-    Add code
+  .. literalinclude:: code/request_objects/nancy/update_user_password.cs
+      :language: csharp
 
 There are many more things you can do with the .NET SDK. Check out the `Stormpath .NET API documentation`_ to learn more!
 

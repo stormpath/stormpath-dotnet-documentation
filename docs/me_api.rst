@@ -41,13 +41,13 @@ You could also set this configuration via code:
 
 .. only:: aspnet
 
-  .. todo::
-    Add code
+  .. literalinclude:: code/me_api/aspnet/configure_uri.cs
+    :language: csharp
 
 .. only:: nancy
 
-  .. todo::
-    Add code
+  .. literalinclude:: code/me_api/nancy/configure_uri.cs
+    :language: csharp
 
 See the :ref:`configuration` section for more details on how configuration works, or :ref:`me_api_default_configuration` to see the default values for this route.
 

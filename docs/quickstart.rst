@@ -72,7 +72,7 @@ Example Projects
 
 If you're feeling lazy (as all good programmers should!), you can download one of our example projects to get up and running super fast:
 
-- `ASP.NET Core (MVC6) Example Project`_
+- `ASP.NET Core 1.0 MVC Example Project`_
 
 .. todo::
   Add ASP.NET and Nancy example projects when available
@@ -85,12 +85,16 @@ Create a New Project
 
 .. only:: aspnetcore
 
-  First, create a new project using the ASP.NET Core template in Visual Studio.
+  If you are using Visual Studio, First, create a new project using the ASP.NET Core template:
 
   1. Click on **File - New Project**.
   2. Under **Visual C# - Web**, pick the **ASP.NET Web Application** template.
-  3. In the New ASP.NET Project dialog, pick **Web Application** from **ASP.NET 5 Templates**.
+  3. In the New ASP.NET Project dialog, pick **Web Application** or **Web API** from **ASP.NET 5 Templates**.
   4. Click **Change Authentication** and pick **No Authentication**. (You'll be adding it yourself!)
+
+  .. todo::
+
+    Update "ASP.NET 5 Templates" when VS is updated.
 
   If you're on Mac or Linux, or just prefer the command line, you can use the `ASP.NET Yeoman Generator`_ to scaffold a new project instead:
 
@@ -99,8 +103,12 @@ Create a New Project
 
 .. only:: aspnet
 
-  .. todo::
-    Add instructions
+  First, create a new project using the ASP.NET template in Visual Studio:
+
+  1. Click on **File - New Project**.
+  2. Under **Visual C# - Web**, pick the **ASP.NET Web Application** template.
+  3. In the New ASP.NET Project dialog, pick the **MVC** or **Web API** template.
+  4. Click **Change Authentication** and pick **No Authentication**. (You'll be adding it yourself!)
 
 .. only:: nancy
 
@@ -113,7 +121,18 @@ Install the Package
 
 .. only:: aspnetcore
 
-  The ``Stormpath.AspNetCore`` package comes with everything you need to plug Stormpath into a ASP.NET Core project. It includes the `Stormpath .NET SDK`_, the Stormpath OWIN middleware, and pre-rendered views that work out of the box.
+  The ``Stormpath.AspNetCore`` package comes with everything you need to plug Stormpath into an ASP.NET Core project.
+
+.. only:: aspnet
+
+  The ``Stormpath.AspNet`` package comes with everything you need to plug Stormpath into an ASP.NET project.
+
+.. only:: nancy
+
+  .. todo::
+    Add blurb.
+
+It includes the `Stormpath .NET SDK`_, the Stormpath OWIN middleware, and pre-rendered views that work out of the box.
 
 The package can be installed with the NuGet Package Manager interface, or using the Package Manager Console:
 
@@ -128,8 +147,10 @@ The package can be installed with the NuGet Package Manager interface, or using 
 
   .. code-block:: none
 
-    PM> install-package Stormpath.AspNet
+    PM> install-package -pre Stormpath.AspNet
 
+  .. todo::
+    Remove -pre
 
 .. only:: nancy
 
@@ -157,10 +178,14 @@ Initialize the Middleware
 
 .. only:: aspnet
 
-  .. todo::
-    Add steps
+  Once the package is installed, you need to add it to your OWIN startup class (usually called ``Startup.cs``).
 
-  .. note:: It's important that the Stormpath middleware is added **before** any middleware that needs to be protected, such as MVC!
+  .. note::
+
+    If you don't have a ``Startup.cs`` file, right-click on your project and select **Add - OWIN Startup class**.
+
+    .. literalinclude:: code/quickstart/aspnet/startup.cs
+      :language: csharp
 
 .. only:: nancy
 

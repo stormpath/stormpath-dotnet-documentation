@@ -75,7 +75,7 @@ Configuration options can also be set by placing a file called ``stormpath.yaml`
 * ``~/.stormpath`` (where ``~`` represents the user's home directory)
 * The application's base directory
 
-.. tip::
+.. note::
   On Windows machines, the home directory is usually ``C:\Users\<username>\``.
 
 For example, this YAML configuration will disable the default ``/register`` and ``/login`` routes:
@@ -89,7 +89,22 @@ For example, this YAML configuration will disable the default ``/register`` and 
     login:
       enabled: false
 
-The ``stormpath:`` root node is implied and should be omitted.
+The equivalent JSON is:
+
+.. code-block:: json
+
+  {
+    "web": {
+      "register": {
+        "enabled": false
+      },
+      "login": {
+        "enabled": false
+      }
+    }
+  }
+
+In both cases, the ``stormpath`` root node is implied and should be omitted.
 
 .. tip::
   You can also refer to the `Example Stormpath configuration`_ to see the entire default library configuration in YAML.
@@ -147,7 +162,7 @@ You can also use an anonymous object with the same (case-insensitive) names:
 Both of these examples will use the Stormpath Application called "My Application" and disable the default ``/register`` route.
 
 .. note::
-  You'll need to add ``using Stormpath.Configuration.Abstractions;`` to your ``Startup.cs`` file in order to use the type-safe ``StormpathConfiguration`` model in the first example.
+  You'll need to add ``using Stormpath.Configuration.Abstractions;`` to your file in order to use the type-safe ``StormpathConfiguration`` model in the first example.
 
 Like all the other methods of supplying configuration, any omitted options will fall back to the `Web Configuration Defaults`_.
 

@@ -133,7 +133,6 @@ Install the Package
   .. todo::
     Add blurb.
 
-It includes the `Stormpath .NET SDK`_, the Stormpath OWIN middleware, and pre-rendered views that work out of the box.
 
 The package can be installed with the NuGet Package Manager interface, or using the Package Manager Console:
 
@@ -153,11 +152,14 @@ The package can be installed with the NuGet Package Manager interface, or using 
   .. todo::
     Remove -pre
 
+
 .. only:: nancy
 
   .. code-block:: none
 
     PM> install-package Stormpath.Nancy
+
+It includes the `Stormpath .NET SDK`_, the Stormpath OWIN middleware, and pre-rendered views that work out of the box.
 
 
 Initialize the Middleware
@@ -185,8 +187,8 @@ Initialize the Middleware
 
     If you don't have a ``Startup.cs`` file, right-click on your project and select **Add - OWIN Startup class**.
 
-    .. literalinclude:: code/quickstart/aspnet/startup.cs
-      :language: csharp
+  .. literalinclude:: code/quickstart/aspnet/startup.cs
+    :language: csharp
 
 .. only:: nancy
 
@@ -207,11 +209,11 @@ With this minimal configuration, the library will do the following:
 
 That's it, you're ready to go! Compile and run your project, and try navigating to these URLs:
 
-- http://localhost:5000/login
-- http://localhost:5000/register
+- http://localhost:50000/login
+- http://localhost:50000/register
 
 .. note::
-  Your port number may differ. Check your project's configuration to find the port number your project is using.
+  Your port number will differ. To find the port assigned to your project, right-click on the project in the Solution Explorer and choose **Properties**. Switch to the **Web** tab and check the URL listed in **Servers - Project Url**.
 
 You should be able to register for an account and log in. The newly created
 account will be placed in the directory that is mapped to "My Application".

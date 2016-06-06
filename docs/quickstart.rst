@@ -159,14 +159,11 @@ The package can be installed with the NuGet Package Manager interface, or using 
 
   .. code-block:: none
 
-    PM> install-package -pre Stormpath.AspNet
-
-  .. todo::
-    Remove -pre
+    PM> install-package Stormpath.AspNet
 
   .. note::
 
-    Older versions of NuGet will sometimes fail to install the package. If you get an error, make sure `NuGet is up to date <https://docs.nuget.org/consume/installing-nuget#updating-nuget-in-visual-studio>`_.
+    Older versions of NuGet might fail to install the package. If you get an error, make sure `NuGet is up to date <https://docs.nuget.org/consume/installing-nuget#updating-nuget-in-visual-studio>`_.
 
 
 .. only:: nancy

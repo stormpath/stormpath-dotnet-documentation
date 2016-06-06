@@ -1,4 +1,4 @@
-public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 {
     // Logging and static file middleware (if applicable)
 

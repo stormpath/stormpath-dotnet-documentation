@@ -1,10 +1,10 @@
 public class InjectedServicesController : Controller
 {
-    public IApplication StormpathApplication { get; private set; }
+    private readonly IApplication stormpathApplication;
 
     public InjectedServicesController(IApplication stormpathApplication)
     {
-        this.StormpathApplication = stormpathApplication;
+        this.stormpathApplication = stormpathApplication;
     }
 
     public IActionResult Index()

@@ -76,22 +76,23 @@ Markup File (YAML or JSON)
 
 Configuration options can also be set by placing a file called ``stormpath.yaml`` or ``stormpath.json`` in one of these locations:
 
-* ``~/.stormpath`` (where ``~`` represents the user's home directory)
+* **Hidden .stormpath Directory**
 
-.. note::
-  On Windows machines, the home directory is usually ``C:\Users\<username>\``.
+On Unix-like machines, the path ``~/.stormpath/`` is searched.
 
-* The application's base directory
+On Windows machines, the path is ``%HOMEDRIVE%%HOMEPATH%%\.stormpath``. This is typically resolved to ``C:\Users\<username>\.stormpath``.
 
-.. note::
+* **Application Base Directory**
 
-  .. only:: aspnetcore
+.. only:: aspnetcore
 
-    Test
+  The application's base directory is defined as the directory that ``project.json`` or ``appsettings.json`` resides in.
 
-  Blah
+.. only:: aspnet
 
-For example, this YAML configuration will disable the default ``/register`` and ``/login`` routes:
+  The application's base directory is defined as the directory that ``web.config`` resides in.
+
+For example, this ``stormpath.yaml`` file will disable the default ``/register`` and ``/login`` routes:
 
 .. code-block:: yaml
 
@@ -102,7 +103,7 @@ For example, this YAML configuration will disable the default ``/register`` and 
     login:
       enabled: false
 
-The equivalent JSON is:
+The equivalent ``stormpath.json`` is:
 
 .. code-block:: json
 

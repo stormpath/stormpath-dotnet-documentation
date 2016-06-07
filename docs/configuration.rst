@@ -12,15 +12,22 @@ There are a few ways you can set these configuration options:
 
 * Environment variables
 * Markup file (YAML or JSON)
+* API credentials file (``apiKey.properties``, used to set the Stormpath API Key and Secret)
 * Inline options in code (supplied to the middleware constructor)
 
 .. todo::
   Add web.config or appsettings.json
 
-Additionally, you can also use an API credentials file (``apiKey.properties``) to set the values of the Stormpath API Key ID and Secret options.
 
-.. note::
-  If you would like a list of all available options, or to view the default values, please refer to the `Web Configuration Defaults`_.
+.. _config_loading_order:
+
+Loading Order
+-------------
+
+These configuration methods are loaded in the order above. This means that values supplied via inline code will override any values supplied via a markup file for the same settings. Likewise, values supplied via a markup file will override values supplied via environment variables for the same settings.
+
+Any settings that are not specified using **any** method will fall back to the `Web Configuration Defaults`_.
+
 
 Required Settings
 -----------------
@@ -34,9 +41,6 @@ the Stormpath middleware to initialize properly:
 Additionally, if you have more than one Application resource in your Stormpath tenant, either ``stormpath.application.name`` or ``stormpath.application.href`` must be set.
 
 If these values aren't set (using one of the methods below), the Stormpath middleware component with throw an error on startup.
-
-.. note::
-  Any other configuration option that is omitted will fall back to the `Web Configuration Defaults`_.
 
 
 Environment Variables
@@ -73,10 +77,19 @@ Markup File (YAML or JSON)
 Configuration options can also be set by placing a file called ``stormpath.yaml`` or ``stormpath.json`` in one of these locations:
 
 * ``~/.stormpath`` (where ``~`` represents the user's home directory)
-* The application's base directory
 
 .. note::
   On Windows machines, the home directory is usually ``C:\Users\<username>\``.
+
+* The application's base directory
+
+.. note::
+
+  .. only:: aspnetcore
+
+    Test
+
+  Blah
 
 For example, this YAML configuration will disable the default ``/register`` and ``/login`` routes:
 
@@ -124,8 +137,11 @@ If you don't opt to store the Stormpath API credentials in environment variables
 Inline Options
 --------------
 
-If you wish to define your configuration in code, you
-can do so when initializing the middleware:
+If you wish to define your configuration in code, you can do so when initializing the middleware.
+
+Values set using inline code have the highest precedence and will override any values set with other methods, such as a markup file. (See :ref:`config_loading_order`.)
+
+The middleware accepts a parameter of type ``StormpathConfiguration`` (found in ``Stormpath.Configuration.Abstractions``):
 
 .. only:: aspnetcore
 
@@ -160,11 +176,6 @@ You can also use an anonymous object with the same (case-insensitive) names:
     :language: csharp
 
 Both of these examples will use the Stormpath Application called "My Application" and disable the default ``/register`` route.
-
-.. note::
-  You'll need to add ``using Stormpath.Configuration.Abstractions;`` to your file in order to use the type-safe ``StormpathConfiguration`` model in the first example.
-
-Like all the other methods of supplying configuration, any omitted options will fall back to the `Web Configuration Defaults`_.
 
 .. tip::
   The most flexible way of providing configuration in a production environment is with YAML/JSON markup or environment variables. Inline options are useful during development.
@@ -257,6 +268,7 @@ The equivalent ``stormpath.yaml`` looks like this:
 
 
 You could also achieve the same result using environment variables, by setting ``STORMPATH_WEB_LOGIN_ENABLED = 'false'`` and so on.
+
 
 Disabling Content Types
 -----------------------

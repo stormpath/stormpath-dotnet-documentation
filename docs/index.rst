@@ -18,6 +18,7 @@ This documentation will show you how to get started with Stormpath and |framewor
    request_objects
    authentication
    .. authorization
+   cors
    oauth2
    me_api
    registration

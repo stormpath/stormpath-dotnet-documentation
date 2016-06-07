@@ -1,5 +1,5 @@
-|framework| Library Guide
-==========================
+Stormpath |framework| Library Guide
+===================================
 
 This library is a plugin for |framework| that makes it *incredibly*
 simple to add users and authentication to your application.  It aims to completely

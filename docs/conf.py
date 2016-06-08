@@ -134,6 +134,10 @@ html_theme_path = ['_themes']
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
+html_context = {
+    'css_files': [ '_static/theme_overrides.css' ]
+}
+
 # Make the default syntax highlighting target Javascript code snippets.
 highlight_language = 'javascript'
 

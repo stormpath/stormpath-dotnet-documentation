@@ -1,5 +1,24 @@
 {% extends "!layout.html" %}
 
+{% block menu %}
+  {{ super() }}
+
+  <hr/>
+
+  <li class="toctree-l1">
+    <a class="reference internal" href="/csharp/product-guide/latest">C# SDK Documentation &rarr;</a>
+  </li>
+
+  <li class="toctree-l1">
+    <a class="reference internal" href="/vbnet/product-guide/latest">VB SDK Documentation &rarr;</a>
+  </li>
+
+  <li class="toctree-l1">
+    <a class="reference internal" href="/dotnet/api/">SDK API Reference &rarr;</a>
+  </li>
+
+{% endblock %}
+
 {% block footer %}
   {{ super() }}
   <script>

@@ -36,21 +36,26 @@ master_doc = 'index'
 # release = the full version, including alpha/beta/rc tags
 if tags.has('aspnetcore'):
     framework_name = u'ASP.NET Core'
-    version = '0.1'
-    release = '0.1.2'
+    #version = '0.1'
+    #release = '0.1.2'
 
 elif tags.has('nancy'):
     framework_name = u'Nancy'
-    version = '0'
-    release = version
+    #version = '0'
+    #release = version
 
 elif tags.has('aspnet'):
     framework_name = u'ASP.NET'
-    version = '0.1'
-    release = '0.1.2-beta2'
+    #version = '0.1'
+    #release = '0.1.2-beta2'
 
 else:
     raise ValueError('Unknown framework tag.')
+
+# Suppress version number for now
+# todo: I think there's a better way to do this (some theme option)
+version = ''
+release = ''
 
 project = u'%s Library Guide' % framework_name
 copyright = '%s, Stormpath, Inc.' % datetime.datetime.now().year

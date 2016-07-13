@@ -4,7 +4,7 @@ Social Login
 ============
 
 Do you want users to authenticate with a social provider, such as Facebook?
-Stormpath provides integration with the following services:
+Stormpath provides integrations with the following services:
 
 * :ref:`Facebook Login <facebook_login>`
 * :ref:`Google Login <google_login>`

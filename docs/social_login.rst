@@ -7,12 +7,9 @@ Do you want users to authenticate with a social provider, such as Facebook?
 Stormpath provides integration with the following services:
 
 * :ref:`Facebook Login <facebook_login>`
-
-.. todo::
-
-  * :ref:`google_login`
-  * :ref:`github_login`
-  * :ref:`linkedin_login`
+* :ref:`Google Login <google_login>`
+* :ref:`Github Login <github_login>`
+* :ref:`LinkedIn Login <linkedin_login>`
 
 
 Overview
@@ -116,6 +113,36 @@ Try logging in! When you click the Facebook button you'll be prompted to authori
 .. image:: /_static/images/login-page-facebook-permissions.png
 
 After authorizing, you'll be redirected back to your website. If you've never logged into this application with Facebook before, you'll be redirected to the ``nextUri`` set in the :ref:`registration route configuration <registration_configuration>`. If you have logged into this application with Facebook before, you'll be redirected to the ``nextUri`` set in the :ref:`login route configuration <login_configuration>`.
+
+
+.. _google_login:
+
+Setting up Google Login
+-------------------------
+
+.. note::
+
+  Detailed instructions for setting up Google login are coming shortly! If you need help in the meantime, please reach out to support@stormpath.com.
+
+
+.. _github_login:
+
+Setting up Github Login
+-------------------------
+
+.. note::
+
+  Detailed instructions for setting up Github login are coming shortly! If you need help in the meantime, please reach out to support@stormpath.com.
+
+
+.. _linkedin_login:
+
+Setting up LinkedIn Login
+-------------------------
+
+.. note::
+
+  Detailed instructions for setting up LinkedIn login are coming shortly! If you need help in the meantime, please reach out to support@stormpath.com.
 
 
 

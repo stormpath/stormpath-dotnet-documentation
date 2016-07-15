@@ -132,7 +132,7 @@ Create a Google Project
 
 First, log into the `Google Developer Console`_ and create a new Google Project. When you click on "Create Project", you should see this:
 
-.. image:: /_static/google-new-project.png
+.. image:: /_static/images/google-new-project.png
 
 Pick a "Project Name" (usually the name of your app), and optionally a "Project ID".
 
@@ -146,7 +146,7 @@ To do this, click on the Project and select "APIs & Auth" on the side panel. Scr
 "OFF" button to enable it.  You should now see the "Google+ API" as
 "ON" in your API list:
 
-.. image:: /_static/google-enable-login.png
+.. image:: /_static/images/google-enable-login.png
 
 
 Create OAuth Credentials
@@ -165,7 +165,7 @@ From the "APIs & Auth" menu, click on "Credentials". Click the "Create New Clien
 
 In the end, your settings should look like this:
 
-.. image:: /_static/google-oauth-settings.png
+.. image:: /_static/images/google-oauth-settings.png
 
 Once you've specified your settings, click the "Create Client ID"
 button.
@@ -250,11 +250,11 @@ Now that you’ve connected your Google Project to Stormpath, you’re ready to 
 
 Restart |framework| (if it’s running) and try visiting the login page (``/login``) in your browser. If you’re using the default views included with this library, you should see the following:
 
-.. image:: /_static/login-page-google.png
+.. image:: /_static/images/login-page-google.png
 
 Try logging in!  When you click the Google button you'll be redirected to Google, and prompted to select your Google account:
 
-.. image:: /_static/login-page-google-account.png
+.. image:: /_static/images/login-page-google-account.png
 
 You'll then be prompted to accept any requested permissions. After authorizing, you'll be redirected back to your website. If you've never logged into this application with Google before, you'll be redirected to the ``nextUri`` set in the :ref:`registration route configuration <registration_configuration>`. If you have logged into this application with Facebook before, you'll be redirected to the ``nextUri`` set in the :ref:`login route configuration <login_configuration>`.
 
@@ -275,7 +275,7 @@ Create a Github Application
 
 First, log into Github and navigate to `Developer applications`_ and click on "Register a new application". You should see something like the following:
 
-.. image:: /_static/github-new-application.png
+.. image:: /_static/images/github-new-application.png
 
 Fill out the fields on the form:
 
@@ -359,11 +359,11 @@ Now that you’ve connected your Github Application to Stormpath, you’re ready
 
 Restart |framework| (if it’s running) and try visiting the login page (``/login``) in your browser. If you’re using the default views included with this library, you should see the following:
 
-.. image:: /_static/login-page-github.png
+.. image:: /_static/images/login-page-github.png
 
 Try logging in!  When you click the Github button you'll be redirected to Github, and prompted to authenticate your Github account:
 
-.. image:: /_static/github-permissions-page.png
+.. image:: /_static/images/github-permissions-page.png
 
 You'll then be prompted to accept any requested permissions. After authorizing, you'll be redirected back to your website. If you've never logged into this application with Github before, you'll be redirected to the ``nextUri`` set in the :ref:`registration route configuration <registration_configuration>`. If you have logged into this application with Facebook before, you'll be redirected to the ``nextUri`` set in the :ref:`login route configuration <login_configuration>`.
 
@@ -384,7 +384,7 @@ Create a LinkedIn Application
 
 First, log into the `LinkedIn Developer Console`_ and create a new LinkedIn Application by clicking the "Create Application" button. You should see something like the following:
 
-.. image:: /_static/linkedin-new-application.gif
+.. image:: /_static/images/linkedin-new-application.gif
 
 Continue by filling out all the required fields.
 
@@ -396,14 +396,14 @@ In order to use the new LinkedIn Application with Stormpath, you need to enable 
 
 Under the "Default Application Permissions" section, enable the ``r_basicprofile`` and the ``r_emailaddress`` permissions. These permissions allow Stormpath to access the basic profile properties like email and first, middle, and last name.
 
-.. image:: /_static/linkedin-add-permissions.gif
+.. image:: /_static/images/linkedin-add-permissions.gif
 
 You'll also need to add our application callback URIs to the "OAuth 2.0" section. The default callback in this library is ``/callbacks/linkedin``. For instance, if your site is running locally on port 3000, as well as under the "www.example.com" domain, you'd add two redirect URIs:
 
 - http://localhost:3000/callbacks/linkedin
 - https://www.example.com/callbacks/linkedin
 
-.. image:: /_static/linkedin-add-authorized-urls.gif
+.. image:: /_static/images/linkedin-add-authorized-urls.gif
 
 Make a note of the **Client ID** and **Client Secret**. You'll need those in the next step.
 
@@ -480,11 +480,11 @@ Now that you’ve connected your LinkedIn Application to Stormpath, you’re rea
 
 Restart |framework| (if it’s running) and try visiting the login page (``/login``) in your browser. If you’re using the default views included with this library, you should see the following:
 
-.. image:: /_static/login-page-linkedin.png
+.. image:: /_static/images/login-page-linkedin.png
 
 Try logging in!  When you click the LinkedIn button you'll be redirected to LinkedIn, and prompted to select your LinkedIn account:
 
-.. image:: /_static/linkedin-permissions-page.png
+.. image:: /_static/images/linkedin-permissions-page.png
 
 You'll then be prompted to accept any requested permissions. After authorizing, you'll be redirected back to your website. If you've never logged into this application with LinkedIn before, you'll be redirected to the ``nextUri`` set in the :ref:`registration route configuration <registration_configuration>`. If you have logged into this application with Facebook before, you'll be redirected to the ``nextUri`` set in the :ref:`login route configuration <login_configuration>`.
 

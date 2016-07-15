@@ -30,10 +30,10 @@ When users log into your application with a social provider, they will be redire
 Setting up Facebook Login
 -------------------------
 
-To use Facebook Login you must:
+To use Facebook Login with your |framework| application, you simply need to:
 
-1. Create a Facebook Application through their Developer site.
-2. Configure a Stormpath Social Directory with the Facebook Application credentials.
+1. Create a Facebook Application through the `Facebook Developer Site`_ .
+2. Configure a Stormpath Directory with the Facebook Application credentials.
 
 
 Create a Facebook Application
@@ -75,7 +75,7 @@ Your settings should now look something like this:
 Create a Facebook Directory
 ...........................
 
-Now that you've created a Facebook Application, you need to create a Stormpath Social Directory that contains the Facebook Application credentials. This allows Stormpath to interact with the Facebook API on your |framework| application's behalf.
+Now that you've created a Facebook Application, you need to create a Stormpath Directory that contains the Facebook Application credentials. This allows Stormpath to interact with the Facebook API on your |framework| application's behalf.
 
 To do this, visit the `Stormpath Admin Console`_ and click on Directories in the navigation bar. Click "Create Directory" and choose Facebook as the Directory type. Next, enter the following information:
 
@@ -89,12 +89,13 @@ Your Directory configuration should look like this:
 
 Click "Create" to finish creating the Directory.
 
+
 Mapping the Directory
-.........................
+.....................
 
 The new Facebook Directory needs to be associated (mapped) to your existing Application as an Account Store. This can also be done from the `Stormpath Admin Console`_.
 
-To do this, click on Applications in the navigation bar, and select your Application from the list. On the details page, click on Account Stores on the left side. Next, click "Add Account Store" and pick the new Facebook Directory you created. Click "Create Mappings".
+To do this, click on Applications in the navigation bar, and select your Application from the list. On the details page, click on Account Stores on the left side. Next, click "Add Account Store" and pick the Facebook Directory you created. Click "Create Mappings".
 
 That's it!
 
@@ -118,11 +119,144 @@ After authorizing, you'll be redirected back to your website. If you've never lo
 .. _google_login:
 
 Setting up Google Login
--------------------------
+-----------------------
+
+To use Google Login with your |framework| application, you simply need to:
+
+1. Create a Google Application in the `Google Developer Console`_.
+2. Configure a Stormpath Directory with the Google Application credentials.
+
+
+Create a Google Project
+.......................
+
+First, log into the `Google Developer Console`_ and create a new Google Project. When you click on "Create Project", you should see this:
+
+.. image:: /_static/google-new-project.png
+
+Pick a "Project Name" (usually the name of your app), and optionally a "Project ID".
+
+
+Enable Google Login
+...................
+
+In order to use Google Login with the new Project you created, you have to enable the Google+ API.
+
+To do this, click on the Project and select "APIs & Auth" on the side panel. Scroll through the API until you see "Google+ API", then click the
+"OFF" button to enable it.  You should now see the "Google+ API" as
+"ON" in your API list:
+
+.. image:: /_static/google-enable-login.png
+
+
+Create OAuth Credentials
+........................
+
+Next, you'll need to create an OAuth client ID. The client ID is what allows your application (and Stormpath) to talk to Google securely.
+
+From the "APIs & Auth" menu, click on "Credentials". Click the "Create New Client ID" button and follow these steps:
+
+1. Select "Web application" for your "Application Type".
+2. Remove everything from the "Authorized Javascript Origins" box.
+3. Add the callback URI of your site (both publicly and locally) into the
+   "Authorized Redirect URI" box.  This tells Google where to
+   redirect users after they've logged in with Google.  The default callback
+   URI for this library is ``/callbacks/google``.
+
+In the end, your settings should look like this:
+
+.. image:: /_static/google-oauth-settings.png
+
+Once you've specified your settings, click the "Create Client ID"
+button.
+
+Make note of the **Client ID** and **Client Secret**. You'll need those in the next step.
+
+
+Create a Google Directory
+.........................
+
+Now that you've created a Google Project, you need to create a Stormpath Directory that contains the Google Project credentials. This allows Stormpath to interact with the Google API on your |framework| application's behalf.
+
+To do this, visit the `Stormpath Admin Console`_ and click on Directories in the navigation bar. Click "Create Directory" and choose Google as the Directory type. Next, enter the following information:
+
+- **Name**: Any descriptive name for the Directory.
+- **Google Client ID**: Insert your Google Client ID from the previous step.
+- **Google Client Secret**: Insert your Google Client Secret.
+- **Google Authorized Redirect URI**: Insert your Google Redirect
+  URL from the previous step.
+
+.. tip::
+
+  Only enter the URI you're currently using! For example, if you are running your app in development mode, set it to your local URL. When you deploy your application, set it to your production URI.
+
+Your Directory configuration should look like this:
+
+  .. image:: /_static/images/google-social-directory.png
+
+Finally, click "Create Directory" to add the Directory to Stormpath.
+
+
+Mapping the Directory
+.....................
+
+The new Google Directory needs to be associated (mapped) to your existing Application as an Account Store. This can also be done from the `Stormpath Admin Console`_.
+
+To do this, click on Applications in the navigation bar, and select your Application from the list. On the details page, click on Account Stores on the left side. Next, click “Add Account Store” and pick the Google Directory you created. Click “Create Mappings”.
+
+
+Configuring Your Server URI
+...........................
+
+The Stormpath |framework| package requires one more bit of configuration to enable Google Login from your application. The ``stormpath.web.serverUri`` property needs to contain the base URL of your web server.
+
+You can configure this using a `YAML or JSON file <config_markup>`_. For example, in YAML:
+
+.. code-block:: yaml
+
+  ---
+    stormpath:
+      web:
+        serverUri: http://localhost:5000
+
+Alternatively, you can set this property in code when you configure the Stormpath middleware:
+
+.. only:: aspnetcore
+
+  .. literalinclude:: code/configuration/aspnetcore/server_uri.cs
+    :language: csharp
+
+.. only:: aspnet
+
+  .. literalinclude:: code/configuration/aspnet/server_uri.cs
+    :language: csharp
+
+.. only:: nancy
+
+  .. .literalinclude:: code/configuration/nancy/anonymous_inline_config.cs
+    :language: csharp
 
 .. note::
 
-  Detailed instructions for setting up Google login are coming shortly! If you need help in the meantime, please reach out to support@stormpath.com.
+  For more information on configuration, see the :ref:`configuration` section.
+
+That's it!
+
+
+Testing Google Login
+....................
+
+Now that you’ve connected your Google Project to Stormpath, you’re ready to test your |framework| application.
+
+Restart |framework| (if it’s running) and try visiting the login page (``/login``) in your browser. If you’re using the default views included with this library, you should see the following:
+
+.. image:: /_static/login-page-google.png
+
+Try logging in!  When you click the Google button you'll be redirected to Google, and prompted to select your Google account:
+
+.. image:: /_static/login-page-google-account.png
+
+You'll then be prompted to accept any requested permissions. After authorizing, you'll be redirected back to your website. If you've never logged into this application with Google before, you'll be redirected to the ``nextUri`` set in the :ref:`registration route configuration <registration_configuration>`. If you have logged into this application with Facebook before, you'll be redirected to the ``nextUri`` set in the :ref:`login route configuration <login_configuration>`.
 
 
 .. _github_login:

@@ -47,7 +47,7 @@ create a new Facebook App. You can do this by clicking the "Apps" menu at the to
 Go ahead and pick a "Display Name" (usually the name of your app), and choose a
 category for your app.  Once you've done this, click the "Create App" button.
 
-todo: Make a note of the **App ID** and **App Secret**. You'll need those later when you connect your Facebook Application to Stormpath.
+Make a note of the **App ID** and **App Secret**. You'll need those later when you connect your Facebook Application to Stormpath.
 
 
 Specify Allowed URLs
@@ -255,6 +255,127 @@ Restart |framework| (if it’s running) and try visiting the login page (``/logi
 Try logging in!  When you click the Google button you'll be redirected to Google, and prompted to select your Google account:
 
 .. image:: /_static/login-page-google-account.png
+
+You'll then be prompted to accept any requested permissions. After authorizing, you'll be redirected back to your website. If you've never logged into this application with Google before, you'll be redirected to the ``nextUri`` set in the :ref:`registration route configuration <registration_configuration>`. If you have logged into this application with Facebook before, you'll be redirected to the ``nextUri`` set in the :ref:`login route configuration <login_configuration>`.
+
+
+.. _linkedin_login:
+
+Setting up LinkedIn Login
+-------------------------
+
+To use LinkedIn Login with your |framework| application, you simply need to:
+
+1. Create a LinkedIn Application in the `LinkedIn Developer Console`_.
+2. Configure a Stormpath Directory with the LinkedIn Application credentials.
+
+
+Create a LinkedIn Application
+.............................
+
+First, log into the `LinkedIn Developer Console`_ and create a new LinkedIn Application by clicking the "Create Application" button. You should see something like the following:
+
+.. image:: /_static/linkedin-new-application.gif
+
+Continue by filling out all the required fields.
+
+
+Enable LinkedIn Permissions
+...........................
+
+In order to use the new LinkedIn Application with Stormpath, you need to enable the correct LinkedIn permissions.
+
+Under the "Default Application Permissions" section, enable the ``r_basicprofile`` and the ``r_emailaddress`` permissions. These permissions allow Stormpath to access the basic profile properties like email and first, middle, and last name.
+
+.. image:: /_static/linkedin-add-permissions.gif
+
+You'll also need to add our application callback URIs to the "OAuth 2.0" section. The default callback in this library is ``/callbacks/linkedin``. For instance, if your site is running locally on port 3000, as well as under the "www.example.com" domain, you'd add two redirect URIs:
+
+- http://localhost:3000/callbacks/linkedin
+- https://www.example.com/callbacks/linkedin
+
+.. image:: /_static/linkedin-add-authorized-urls.gif
+
+Make a note of the **Client ID** and **Client Secret**. You'll need those in the next step.
+
+
+Create a LinkedIn Directory
+...........................
+
+Now that you’ve created a LinkedIn Application, you need to create a Stormpath Directory that contains the LinkedIn Application credentials. This allows Stormpath to interact with the LinkedIn API on your |framework| application’s behalf.
+
+To do this, visit the `Stormpath Admin Console`_ and click on Directories in the navigation bar. Click “Create Directory” and choose LinkedIn as the Directory type. Next, enter the following information:
+
+- **Name**: Any descriptive name for the Directory.
+- **LinkedIn Client ID**: Insert your LinkedIn Client ID from the previous step.
+- **LinkedIn Client Secret**: Insert your LinkedIn Client Secret.
+
+Your Directory configuration should look like this:
+
+  .. image:: /_static/images/linkedin-social-directory.png
+
+Finally, click "Create Directory" to add the Directory to Stormpath.
+
+
+Mapping the Directory
+.....................
+
+The new LinkedIn Directory needs to be associated (mapped) to your existing Application as an Account Store. This can also be done from the `Stormpath Admin Console`_.
+
+To do this, click on Applications in the navigation bar, and select your Application from the list. On the details page, click on Account Stores on the left side. Next, click “Add Account Store” and pick the new Facebook Directory you created. Click “Create Mappings”.
+
+
+Configuring Your Server URI
+...........................
+
+The Stormpath |framework| package requires one more bit of configuration to enable LinkedIn Login from your application. The ``stormpath.web.serverUri`` property needs to contain the base URL of your web server.
+
+You can configure this using a `YAML or JSON file <config_markup>`_. For example, in YAML:
+
+.. code-block:: yaml
+
+  ---
+    stormpath:
+      web:
+        serverUri: http://localhost:5000
+
+Alternatively, you can set this property in code when you configure the Stormpath middleware:
+
+.. only:: aspnetcore
+
+  .. literalinclude:: code/configuration/aspnetcore/server_uri.cs
+    :language: csharp
+
+.. only:: aspnet
+
+  .. literalinclude:: code/configuration/aspnet/server_uri.cs
+    :language: csharp
+
+.. only:: nancy
+
+  .. .literalinclude:: code/configuration/nancy/anonymous_inline_config.cs
+    :language: csharp
+
+.. note::
+
+  For more information on configuration, see the :ref:`configuration` section.
+
+
+That's it!
+
+
+Testing LinkedIn Login
+......................
+
+Now that you’ve connected your LinkedIn Application to Stormpath, you’re ready to test your |framework| application.
+
+Restart |framework| (if it’s running) and try visiting the login page (``/login``) in your browser. If you’re using the default views included with this library, you should see the following:
+
+.. image:: /_static/login-page-linkedin.png
+
+Try logging in!  When you click the LinkedIn button you'll be redirected to LinkedIn, and prompted to select your LinkedIn account:
+
+.. image:: /_static/linkedin-permissions-page.png
 
 You'll then be prompted to accept any requested permissions. After authorizing, you'll be redirected back to your website. If you've never logged into this application with Google before, you'll be redirected to the ``nextUri`` set in the :ref:`registration route configuration <registration_configuration>`. If you have logged into this application with Facebook before, you'll be redirected to the ``nextUri`` set in the :ref:`login route configuration <login_configuration>`.
 

@@ -40,14 +40,14 @@ Create a Facebook Application
 .............................
 
 First, log into the `Facebook Developer Site`_ and
-create a new Facebook App. You can do this by clicking the "Apps" menu at the top of the screen, then select the "Create a New App" button.  You should see something like the following:
+create a new Facebook App. You can do this by clicking the "My Apps" menu at the top of the screen, and then clicking on the "Add a New App" button.  You should see something like the following:
 
 .. image:: /_static/images/facebook-new-project.png
 
-Go ahead and pick a "Display Name" (usually the name of your app), and choose a
-category for your app.  Once you've done this, click the "Create App" button.
+Enter a "Display Name" (the name of your app), and choose a
+category for your app.  Once you've done this, click the "Create App ID" button.
 
-Make a note of the **App ID** and **App Secret**. You'll need those later when you connect your Facebook Application to Stormpath.
+Next, click on Settings on the left side, and make note of the **App ID** and **App Secret**. You'll need those later when you connect your Facebook Application to Stormpath.
 
 
 Specify Allowed URLs
@@ -56,20 +56,22 @@ Specify Allowed URLs
 The next step is to tell Facebook what URLs we'll be using Facebook
 Login from.
 
-From the app dashboard page you're on, click the "Settings" tab in the left
-menu, then click the "Add Platform" button near the bottom of the page.  When
-prompted, select "Website" as your platform type.
+From the Settings page, click the "Add Platform" button. When prompted, select "Website" as your platform type.
 
 In the "Site URL" box, enter your private and public root URLs.  This should be
 something like ``http://localhost:5000`` or ``http://mysite.com``.  If you
 want to allow Facebook Login from multiple URLs (local development, production,
 etc.) you can just click the "Add Platform" button again and enter another URL.
 
-Lastly, click the "Save Changes" button to save the changes.
+Click the "Save Changes" button at the bottom of the page.
 
-Your settings should now look something like this:
+Next, click on "Add Product" on the left side of the page, and add Facebook Login. In the "Valid OAuth redirect URIs" field, add the callback URI provided by this library, which is ``/callbacks/facebook`` by default. If your site is hosted locally on port 5000, your callback URI is ``http://localhost:5000/callbacks/facebook``.
+
+Your configuration should look something like this:
 
 .. image:: /_static/images/facebook-url-settings.png
+
+Lastly, click the "Save Changes" button once more to save the changes.
 
 
 Create a Facebook Directory
@@ -170,7 +172,7 @@ In the end, your settings should look like this:
 Once you've specified your settings, click the "Create Client ID"
 button.
 
-Make note of the **Client ID** and **Client Secret**. You'll need those in the next step.
+Make note of the **Client ID** and **Client secret**. You'll need those in the next step.
 
 
 Create a Google Directory
@@ -182,7 +184,7 @@ To do this, visit the `Stormpath Admin Console`_ and click on Directories in the
 
 - **Name**: Any descriptive name for the Directory.
 - **Google Client ID**: Insert your Google Client ID from the previous step.
-- **Google Client Secret**: Insert your Google Client Secret.
+- **Google Client Secret**: Insert your Google Client secret.
 - **Google Authorized Redirect URI**: Insert your Google Redirect
   URL from the previous step.
 
@@ -382,11 +384,13 @@ To use LinkedIn Login with your |framework| application, you simply need to:
 Create a LinkedIn Application
 .............................
 
-First, log into the `LinkedIn Developer Console`_ and create a new LinkedIn Application by clicking the "Create Application" button. You should see something like the following:
+First, log into the `LinkedIn Developer Console`_ and create a new LinkedIn Application by clicking the "Create Application" button. Fill out the fields on the form, in particular:
 
-.. image:: /_static/images/linkedin-new-application.gif
+- **Name**: The name of your application.
+- **Application Use**: Pick the intended use of your application.
+- **Website URL**: The base URL of your application.
 
-Continue by filling out all the required fields.
+Click "Submit" to finish creating the new application.
 
 
 Enable LinkedIn Permissions
@@ -396,14 +400,12 @@ In order to use the new LinkedIn Application with Stormpath, you need to enable 
 
 Under the "Default Application Permissions" section, enable the ``r_basicprofile`` and the ``r_emailaddress`` permissions. These permissions allow Stormpath to access the basic profile properties like email and first, middle, and last name.
 
-.. image:: /_static/images/linkedin-add-permissions.gif
-
 You'll also need to add our application callback URIs to the "OAuth 2.0" section. The default callback in this library is ``/callbacks/linkedin``. For instance, if your site is running locally on port 3000, as well as under the "www.example.com" domain, you'd add two redirect URIs:
 
 - http://localhost:3000/callbacks/linkedin
 - https://www.example.com/callbacks/linkedin
 
-.. image:: /_static/images/linkedin-add-authorized-urls.gif
+.. image:: /_static/images/linkedin-oauth-configuration.png
 
 Make a note of the **Client ID** and **Client Secret**. You'll need those in the next step.
 

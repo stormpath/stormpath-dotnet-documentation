@@ -259,6 +259,115 @@ Try logging in!  When you click the Google button you'll be redirected to Google
 You'll then be prompted to accept any requested permissions. After authorizing, you'll be redirected back to your website. If you've never logged into this application with Google before, you'll be redirected to the ``nextUri`` set in the :ref:`registration route configuration <registration_configuration>`. If you have logged into this application with Facebook before, you'll be redirected to the ``nextUri`` set in the :ref:`login route configuration <login_configuration>`.
 
 
+.. _github_login:
+
+Setting up Github Login
+-------------------------
+
+To use Github Login with your |framework| application, you simply need to:
+
+1. Create a Github Application on Github.
+2. Configure a Stormpath Directory with the Github Application credentials.
+
+
+Create a Github Application
+...........................
+
+First, log into Github and navigate to `Developer applications`_ and click on "Register a new application". You should see something like the following:
+
+.. image:: /_static/github-new-application.png
+
+Fill out the fields on the form:
+
+- **Application name**: The name of your application.
+- **Homepage URL**: The base URL of your application.
+- **Application description**: A basic description of your application.
+- **Authorization callback URL**: By default, this library hosts a callback route at ``/callbacks/github``. For example, if your application is running locally on port 5000, your callback URL would be ``http://localhost:5000/callbacks/github``.
+
+Click "Register application" to finish creating the new application. Make a note of the **Client ID** and **Client Secret**. You'll need those in the next step.
+
+
+Create a Github Directory
+.........................
+
+Now that you’ve created a Github Application, you need to create a Stormpath Directory that contains the Github Application credentials. This allows Stormpath to interact with the Github API on your |framework| application’s behalf.
+
+To do this, visit the `Stormpath Admin Console`_ and click on Directories in the navigation bar. Click “Create Directory” and choose Github as the Directory type. Next, enter the following information:
+
+- **Name**: Any descriptive name for the Directory.
+- **Github Client ID**: Insert your Github Client ID from the previous step.
+- **Github Client Secret**: Insert your Github Client Secret.
+
+Your Directory configuration should look like this:
+
+  .. image:: /_static/images/github-social-directory.png
+
+Finally, click "Create Directory" to add the Directory to Stormpath.
+
+
+Mapping the Directory
+.....................
+
+The new Github Directory needs to be associated (mapped) to your existing Application as an Account Store. This can also be done from the `Stormpath Admin Console`_.
+
+To do this, click on Applications in the navigation bar, and select your Application from the list. On the details page, click on Account Stores on the left side. Next, click “Add Account Store” and pick the new Facebook Directory you created. Click “Create Mappings”.
+
+
+Configuring Your Server URI
+...........................
+
+The Stormpath |framework| package requires one more bit of configuration to enable Github Login from your application. The ``stormpath.web.serverUri`` property needs to contain the base URL of your web server.
+
+You can configure this using a `YAML or JSON file <config_markup>`_. For example, in YAML:
+
+.. code-block:: yaml
+
+  ---
+    stormpath:
+      web:
+        serverUri: http://localhost:5000
+
+Alternatively, you can set this property in code when you configure the Stormpath middleware:
+
+.. only:: aspnetcore
+
+  .. literalinclude:: code/configuration/aspnetcore/server_uri.cs
+    :language: csharp
+
+.. only:: aspnet
+
+  .. literalinclude:: code/configuration/aspnet/server_uri.cs
+    :language: csharp
+
+.. only:: nancy
+
+  .. .literalinclude:: code/configuration/nancy/anonymous_inline_config.cs
+    :language: csharp
+
+.. note::
+
+  For more information on configuration, see the :ref:`configuration` section.
+
+
+That's it!
+
+
+Testing Github Login
+......................
+
+Now that you’ve connected your Github Application to Stormpath, you’re ready to test your |framework| application.
+
+Restart |framework| (if it’s running) and try visiting the login page (``/login``) in your browser. If you’re using the default views included with this library, you should see the following:
+
+.. image:: /_static/login-page-github.png
+
+Try logging in!  When you click the Github button you'll be redirected to Github, and prompted to authenticate your Github account:
+
+.. image:: /_static/github-permissions-page.png
+
+You'll then be prompted to accept any requested permissions. After authorizing, you'll be redirected back to your website. If you've never logged into this application with Github before, you'll be redirected to the ``nextUri`` set in the :ref:`registration route configuration <registration_configuration>`. If you have logged into this application with Facebook before, you'll be redirected to the ``nextUri`` set in the :ref:`login route configuration <login_configuration>`.
+
+
 .. _linkedin_login:
 
 Setting up LinkedIn Login
@@ -377,27 +486,7 @@ Try logging in!  When you click the LinkedIn button you'll be redirected to Link
 
 .. image:: /_static/linkedin-permissions-page.png
 
-You'll then be prompted to accept any requested permissions. After authorizing, you'll be redirected back to your website. If you've never logged into this application with Google before, you'll be redirected to the ``nextUri`` set in the :ref:`registration route configuration <registration_configuration>`. If you have logged into this application with Facebook before, you'll be redirected to the ``nextUri`` set in the :ref:`login route configuration <login_configuration>`.
-
-
-.. _github_login:
-
-Setting up Github Login
--------------------------
-
-.. note::
-
-  Detailed instructions for setting up Github login are coming shortly! If you need help in the meantime, please reach out to support@stormpath.com.
-
-
-.. _linkedin_login:
-
-Setting up LinkedIn Login
--------------------------
-
-.. note::
-
-  Detailed instructions for setting up LinkedIn login are coming shortly! If you need help in the meantime, please reach out to support@stormpath.com.
+You'll then be prompted to accept any requested permissions. After authorizing, you'll be redirected back to your website. If you've never logged into this application with LinkedIn before, you'll be redirected to the ``nextUri`` set in the :ref:`registration route configuration <registration_configuration>`. If you have logged into this application with Facebook before, you'll be redirected to the ``nextUri`` set in the :ref:`login route configuration <login_configuration>`.
 
 
 
@@ -405,3 +494,4 @@ Setting up LinkedIn Login
 .. _Facebook Developer Site: https://developers.facebook.com/
 .. _Google Developer Console: https://console.developers.google.com/project
 .. _LinkedIn Developer Console: https://www.linkedin.com/developer/apps
+.. _Developer applications: https://github.com/settings/developers

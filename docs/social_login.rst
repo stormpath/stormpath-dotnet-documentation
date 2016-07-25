@@ -182,9 +182,9 @@ You can configure this using a `YAML or JSON file <config_markup>`_. For example
 .. code-block:: yaml
 
   ---
-    stormpath:
-      web:
-        serverUri: http://localhost:5000
+  stormpath:
+    web:
+     serverUri: http://localhost:5000
 
 Alternatively, you can set this property in code when you configure the Stormpath middleware:
 
@@ -326,9 +326,9 @@ You can configure this using a `YAML or JSON file <config_markup>`_. For example
 .. code-block:: yaml
 
   ---
-    stormpath:
-      web:
-        serverUri: http://localhost:5000
+  stormpath:
+    web:
+     serverUri: http://localhost:5000
 
 Alternatively, you can set this property in code when you configure the Stormpath middleware:
 
@@ -446,9 +446,9 @@ You can configure this using a `YAML or JSON file <config_markup>`_. For example
 .. code-block:: yaml
 
   ---
-    stormpath:
-      web:
-        serverUri: http://localhost:5000
+  stormpath:
+    web:
+     serverUri: http://localhost:5000
 
 Alternatively, you can set this property in code when you configure the Stormpath middleware:
 

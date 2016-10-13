@@ -177,7 +177,7 @@ Configuring Your Server URI
 
 The Stormpath |framework| package requires one more bit of configuration to enable Github Login from your application. The ``stormpath.web.serverUri`` property needs to contain the base URL of your web server.
 
-You can configure this using a `YAML or JSON file <config_markup>`_. For example, in YAML:
+You can configure this using a :ref:`YAML or JSON file <config_markup>`. For example, in YAML:
 
 .. code-block:: yaml
 
@@ -321,7 +321,7 @@ Configuring Your Server URI
 
 The Stormpath |framework| package requires one more bit of configuration to enable Google Login from your application. The ``stormpath.web.serverUri`` property needs to contain the base URL of your web server.
 
-You can configure this using a `YAML or JSON file <config_markup>`_. For example, in YAML:
+You can configure this using a :ref:`YAML or JSON file <config_markup>`. For example, in YAML:
 
 .. code-block:: yaml
 
@@ -441,7 +441,7 @@ Configuring Your Server URI
 
 The Stormpath |framework| package requires one more bit of configuration to enable LinkedIn Login from your application. The ``stormpath.web.serverUri`` property needs to contain the base URL of your web server.
 
-You can configure this using a `YAML or JSON file <config_markup>`_. For example, in YAML:
+You can configure this using a :ref:`YAML or JSON file <config_markup>`. For example, in YAML:
 
 .. code-block:: yaml
 

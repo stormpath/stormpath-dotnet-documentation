@@ -123,7 +123,7 @@ If you are using this library from a mobile application, or a client framework l
 
 To start the password reset flow, send a POST request to ``/forgot``:
 
-.. code-block:: http
+.. code-block:: none
 
   POST /forgot
   Accept: application/json
@@ -137,7 +137,7 @@ The ``/forgot`` endpoint will always respond with ``200 OK``, regardless of whet
 
 If you have a valid ``sptoken``, you can complete the password reset flow by sending a POST to ``/change`` with the user's new password:
 
-.. code-block:: http
+.. code-block:: none
 
   POST /change
   Accept: application/json

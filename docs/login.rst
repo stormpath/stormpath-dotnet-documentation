@@ -228,7 +228,7 @@ Making a Login Attempt
 
 Simply POST to the ``/login`` endpoint with the user's credentials:
 
-.. code-block:: http
+.. code-block:: none
 
     POST /login
     Accept: application/json

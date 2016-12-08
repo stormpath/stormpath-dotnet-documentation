@@ -424,7 +424,7 @@ Registering a User
 Simply post a JSON object to ``/register`` and supply the fields that you wish to
 populate for the user:
 
-.. code-block:: http
+.. code-block:: none
 
     POST /register
     Accept: application/json
@@ -471,7 +471,7 @@ Supplying Custom Fields
 
 If any custom fields exist on the form (see :ref:`register_custom_fields`), you can supply them either as a root property, or a child of a property called ``customData``:
 
-.. code-block:: http
+.. code-block:: none
 
   POST /register
   Accept: application/json

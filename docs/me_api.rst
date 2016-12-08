@@ -57,7 +57,7 @@ Using the Endpoint
 
 Given a valid access token value or cookie (see :ref:`authentication`), you can make a GET request to ``/me`` to get a JSON representation of the account that is currently logged in:
 
-.. code-block:: http
+.. code-block:: none
 
   GET /me
   Accept: application/json

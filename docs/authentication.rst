@@ -351,7 +351,7 @@ uses them for future requests to your |framework| application.
 When a user wants to login to your mobile application, the mobile application
 should make this request to your application:
 
-.. code-block::
+.. code-block:: none
 
     POST /oauth/token
     Host: myapi.com
@@ -383,7 +383,7 @@ Your mobile application should store the Access and Refresh Tokens in a secure l
 
 Each subsequent request the mobile application makes to your |framework| application should include the Access Token as a ``Bearer`` header:
 
-.. code-block:: http
+.. code-block:: none
 
     GET /profile
     Host: myapi.com
@@ -397,7 +397,7 @@ Getting a New Access Token
 
 When the Access Token expires, you can use the Refresh Token to obtain a new Access Token:
 
-.. code-block:: http
+.. code-block:: none
 
     POST /oauth/token
     Host: myapi.com

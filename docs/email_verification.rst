@@ -109,7 +109,7 @@ Verifying a User
 
 To verify a user, make a GET request with the ``sptoken`` from the verification email:
 
-.. code-block:: http
+.. code-block:: none
 
   GET /verify?sptoken=<token>
   Accept: application/json
@@ -131,7 +131,7 @@ Requesting a New Link
 
 To request a new link, make a POST request:
 
-.. code-block:: http
+.. code-block:: none
 
   POST /verify
   Accept: application/json

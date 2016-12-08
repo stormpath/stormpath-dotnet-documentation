@@ -7,6 +7,8 @@ The Stormpath |framework| library provides two ways to easily enforce authorizat
 
 Which authorization approach you choose depends on the needs of your application. For most applications, a group-based approach is the fastest and easiest way to implement authorization.
 
+.. _requiring_login:
+
 Requiring Login
 ---------------
 

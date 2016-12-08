@@ -15,7 +15,8 @@ This documentation will show you how to get started with Stormpath and |framewor
    introduction
    quickstart
    configuration
-   request_objects
+   request_context
+   using_the_sdk
    cors
    authentication
    authorization

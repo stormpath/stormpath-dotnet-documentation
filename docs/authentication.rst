@@ -26,30 +26,7 @@ Cookie Authentication
 If you are building a web application that serves traditional HTML pages, or a
 Single Page Application (such as Angular/React), this library will handle cookie authentication for you, out of the box!
 
-.. only:: aspnetcore or aspnet
-
-  To use cookie authentication, simply use the ``[Authorize]`` attribute on your MVC or Web API routes:
-
-  .. only:: aspnetcore
-
-    .. literalinclude:: code/authentication/aspnetcore/protected_route.cs
-        :language: csharp
-
-  .. only:: aspnet
-
-    .. literalinclude:: code/authentication/aspnet/protected_route.cs
-        :language: csharp
-
-.. only:: nancy
-
-  .. todo::
-
-    Description.
-
-  .. .literalinclude:: code/authentication/nancy/protected_route.cs
-      :language: csharp
-
-If the user is not logged in, they will be redirected to the built-in login route (``/login`` by default) to log in or register. After authenticating, they will be redirected back to the original route automatically.
+.. todo!
 
 Behind the scenes, the Stormpath middleware creates OAuth 2.0 Access and Refresh Tokens for the user (via the Stormpath API), and stores them in secure, HTTP-only cookies. After the user has logged in, these cookies will be supplied on every request. The Stormpath middleware will assert that the Access Token is valid.  If the Access Token is expired, it will attempt to refresh it with the Refresh Token.
 

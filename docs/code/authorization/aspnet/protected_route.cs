@@ -7,11 +7,4 @@ public class SecretController : ApiController
     {
         return "secret!";
     }
-
-    // POST api/<controller>
-    public void Post([FromBody]string value)
-    {
-        // do something
-    }
-
 }

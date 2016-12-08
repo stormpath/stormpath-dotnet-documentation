@@ -1,6 +1,6 @@
 .. _stormpath_objects:
 
-Request Objects
+Request objects
 ===============
 
 When the Stormpath middleware is added to your |framework| application pipeline,
@@ -76,8 +76,8 @@ For example, to search for an account by email address:
   Update this link to the One Product Guide when done.
 
 
-Current User Account
---------------------
+Current Account
+---------------
 
 This library automatically checks incoming requests for authentication information, and resolves the user's identity to a Stormpath Account if the information is valid. This happens on **every** request, not just routes that require authentication.
 
@@ -110,8 +110,8 @@ This library automatically checks incoming requests for authentication informati
   * ``ClaimTypes.Surname``
   * ``"FullName"`` (The computed ``fullName`` property in Stormpath)
 
-Stormpath Account
-'''''''''''''''''
+Stormpath IAccount
+''''''''''''''''''
 
 .. only:: aspnetcore
 
@@ -170,7 +170,7 @@ Tasks and Cancellation
 
 Every method in the Stormpath .NET SDK that makes a network call returns a ``Task`` and is fully awaitable. Each method also has an optional overload that accepts a ``CancellationToken``, if you need to support request cancellation.
 
-Making Synchronous Calls
+Making synchronous calls
 ''''''''''''''''''''''''
 
 We recommend interacting with the SDK asynchronously, but if your application isn't ready to be fully async, the SDK supports synchronous calls as well.

@@ -142,8 +142,48 @@ To require the user to be in more than one Group, apply the syntax twice:
 Fine-Grained Permissions
 ------------------------
 
-.. todo::
-  customData
+If you need finer control over authorization, you can use Stormpath's `Custom Data`_ feature to model any type of permissions you need in your application.
 
+For example, if you only want some users to be able to post messages in your application, you could add a ``canPost: true`` item to the Accounts who have that privilege.
+
+Requiring a particular Custom Data value is similar to requiring a Group:
+
+.. only:: aspnet
+
+  .. literalinclude:: code/authorization/aspnet/require_customData.cs
+      :language: csharp
+
+.. only:: aspnetcore
+
+  .. literalinclude:: code/authorization/aspnetcore/require_customData_startup.cs
+      :language: csharp
+
+  Once the policy has been defined, you can use it on your controllers and actions:
+
+  .. literalinclude:: code/authorization/aspnetcore/require_customData_controller.cs
+      :language: csharp
+
+.. only:: nancy
+
+  .. .literalinclude:: code/authorization/nancy/require_customData.cs
+      :language: csharp
+
+To require multiple Custom Data values, just add another reference:
+
+.. only:: aspnet
+
+  .. literalinclude:: code/authorization/aspnet/require_multiple_customData.cs
+      :language: csharp
+
+.. only:: aspnetcore
+
+  .. literalinclude:: code/authorization/aspnetcore/require_multiple_customData.cs
+      :language: csharp
+
+.. only:: nancy
+
+  .. .literalinclude:: code/authorization/nancy/require_multiple_customData.cs
+      :language: csharp
 
 .. _Stormpath Admin Console: https://api.stormpath.com/login
+.. _Custom Data: https://docs.stormpath.com/csharp/product-guide/latest/accnt_mgmt.html#how-to-store-additional-user-information-as-custom-data

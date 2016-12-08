@@ -19,7 +19,7 @@ This documentation will show you how to get started with Stormpath and |framewor
    cors
    authentication
    authorization
-   .. id_site
+   id_site
    .. multi_environments
    templates
    oauth2

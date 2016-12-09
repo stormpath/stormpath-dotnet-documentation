@@ -33,186 +33,77 @@ You'll need a way to securely distribute these API keys to your users. In a prod
 HTTP Basic authentication
 -------------------------
 
+Basic authentication is a simple way for your users to make authenticated calls to your API service. The API key ID and secret are included with every request, which makes calling the API very straightforward.
+
+.. warning::
+
+  Because the API credentials are sent in the clear on every request, it is important to **always** use TLS (HTTPS) when building a service that uses Basic authentication. Services that need stronger security should use the :ref:`oauth2_client_credentials_grant` instead.
+
+The Stormpath |framework| library supports Basic authentication out-of-the-box. Once your user has an :ref:`API key <issuing_api_keys>`, they can use it to authenticate against your API by constructing the appropriate HTTP ``Authorization`` header:
+
+.. code-block:: none
+
+  Authorization: Basic <base64UrlSafe(apiKeyId + ":" + apiKeySecret)>
+
+If the API key ID and secret are valid, the Stormpath middleware will authenticate the request, and the user will be authorized to access protected endpoints.
+
+.. note::
+
+  See the :ref:`authorization` section for details on requiring authentication for controllers and routes.
+
 
 .. _oauth2_client_credentials_grant:
 
 OAuth 2.0 client credentials grant
 ----------------------------------
 
+Instead of using Basic authentication and sending the API credentials with every request, you can require your users to exchange their API credentials for an OAuth 2.0 access token. This flow is slightly more complicated, but is more secure because the credentials are only sent over the wire once.
 
-.. todo::
+Once your user has an :ref:`API key <issuing_api_keys>`, they will need to POST to the ``/oauth/token`` endpoint to obtain an access token:
 
-  HTTP Basic Authentication
-  .. -------------------------
+.. code-block:: none
 
-  This strategy makes sense if you are building a simple API service that does
-  not have complex needs around authorization and resource control.  This strategy
-  is simple because the developer simply supplies their API keys on every request
-  to your server.
+  POST /oauth/token
+  Content-Type: application/x-www-form-urlencoded
+  Authorization: Basic <base64UrlSafe(apiKeyId + ":" + apiKeySecret)>
 
-  Once the developer has their API keys, they will use them to authenticate with your
-  API.  For each request they will set the ``Authorization`` header, like this::
+  grant_type=client_credentials
 
-      Authorization: Basic <Base64UrlSafe(apiKeyId:apiKeySecret)>
+If the API key ID and secret are valid, the server will return a JSON response:
 
-  How this is done will depend on what tool or library they are using.  For example,
-  if using curl:
+.. code-block:: json
 
-  .. code-block:: sh
+  {
+    "access_token": "eyJ0eXAiOiJKV1QiL...",
+    "token_type": "bearer",
+    "expires_in": 3600
+  }
 
-    curl -v --user apiKeyId:apiKeySecret http://localhost:3000/secret
+The response has the following properties:
 
-  Or if you're using the ``request`` library:
+  - ``access_token`` - The access token itself.
+  - ``token_type`` - This will always be ``bearer``.
+  - ``expires_in`` - The number of seconds the token is valid.
 
-  .. code-block:: javascript
+The user can then make requests to your API by including the access token:
 
-    var request = require('request');
+.. code-block:: none
 
-    request({
-      url: 'http://localhost:3000/secret',
-      auth: {
-        user: 'apiKeyId',
-        pass: 'apiKeySecret'
-      }
-    }, function (err, res){
-      console.log(res.body);
-    });
+  GET /secret
+  Authorization: Bearer eyJ0eXAiOiJKV1QiL...
 
-  You will need to tell your application that you want to secure this endpoint and
-  allow basic authentication.  This is done with the ``apiAuthenticationRequired``
-  middleware::
+If the access token is valid and has not expired, the Stormpath middleware will authenticate the request, and the user will be authorized to access protected endpoints.
 
-      app.get('/secret', stormpath.apiAuthenticationRequired, function (req, res) {
-        res.json({
-          message: "Hello, " + req.user.fullname
-        });
-      });
+.. note::
 
-todo
+  See the :ref:`authorization` section for details on requiring authentication for controllers and routes.
 
-.. todo::
+The client credentials grant type is enabled by default. You can disable it, or change the access token TTL, by changing the :ref:`OAuth 2.0 route configuration <oauth2_config_options>`.
 
-  OAuth2 Client Credentials
-  .. -------------------------
+.. warning::
 
-  If you are building an API service and you have complex needs around
-  authorization and security, this strategy should be used.  In this situation
-  the developer does a one-time exchange of their API Keys for an Access Token.
-  This Access Token is time limited and must be periodically refreshed.  This adds a
-  layer of security, at the cost of being less simple than HTTP Basic
-  Authentication.
+  The client credentials flow requires the API credentials to be sent in the clear at the start of the session, so using TLS (HTTPS) is still important.
 
-  If you're not sure which strategy to use, it's best to start with HTTP Basic
-  Authentication. You can always switch to OAuth2 at a later time.
-
-  Once a developer has an API Key pair (see above, *Issuing API Keys*), they will
-  need to use the OAuth2 Token Endpoint to obtain an Access Token.  In simple
-  HTTP terms, that request looks like this::
-
-
-      POST /oauth/token
-      Host: myapi.com
-      Content-Type: application/x-www-form-urlencoded
-      Authorization: Basic <Base64UrlSafe(apiKeyId:apiKeySecret)>
-
-      grant_type=client_credentials
-
-  How you construct this request will depend on your library or tool, but the key
-  parts you need to know are:
-
-    * The request must be a POST request.
-    * The content type must be form encoded, and the body must contain
-      ``grant_type=client_credentials``.
-    * The Authorization header must be Basic and contain the Base64 Url-Encoded
-      values of the Api Key Pair.
-
-  If you were doing this request with curl, it would look like this:
-
-  .. code-block:: sh
-
-    curl -X POST --user api_key_id:api_key_secret http://localhost:3000/oauth/token -d grant_type=client_credentials
-
-  Or if using the ``request`` library:
-
-  .. code-block:: javascript
-
-    request({
-      url: 'http://localhost:3000/oauth/token',
-      method: 'POST',
-      auth: {
-        user: '1BWQHHJCOW90HI7HFQ5LTD6O0',
-        pass: 'zzeu+NwmicjtJ9yDJ2KlRguC+8uTjKVm3AMs80ah6hw'
-      },
-      form: {
-        'grant_type': 'client_credentials'
-      }
-    },function (err,res) {
-      console.log(res.body);
-    });
-
-  If the credentials are valid, you will get an Access Token response that looks
-  like this::
-
-      {
-        "access_token": "eyJ0eXAiOiJKV1QiL...",
-        "token_type": "bearer",
-        "expires_in": 3600
-      }
-
-  The response is a JSON object which contains:
-
-  - ``access_token`` - Your OAuth Access Token.  This can be used to authenticate
-    on future requests.
-  - ``token_type`` - This will always be ``"bearer"``.
-  - ``expires_in`` - This is the amount of seconds (*as an integer*) for which
-    this token is valid.
-
-  With this token you can now make requests to your API.  This request is simpler,
-  as only thing you need to supply is ``Authorization`` header with the Access
-  Token as a bearer token.  If you are using curl, that request looks like this:
-
-  .. code-block:: sh
-
-    curl -v -H "Authorization: Bearer eyJ0eXAiOiJKV1QiL..." http://localhost:3000/secret
-
-  Or if using the ``request`` library:
-
-  .. code-block:: javascript
-
-    request({
-      url: 'http://localhost:3000/secret',
-      auth: {
-        'bearer': 'eyJ0eXAiOiJKV1QiL...'
-      }
-    }, function (err, res){
-      console.log(res.body);
-    });
-
-  In order to protect your API endpoint and allow this form of authenetication,
-  you need to use the ``apiAuthenticationRequired`` middleware::
-
-      app.get('/secret', stormpath.apiAuthenticationRequired, function (req, res) {
-        res.json({
-          message: "Hello, " + req.user.fullname
-        });
-      });
-
-  By default the Access Tokens are valid for one hour.  If you want to change
-  the expiration of these tokens you will need to configure it in the server
-  configuration, like this::
-
-
-      app.use(stormpath.init(app, {
-        web: {
-          oauth2: {
-            client_credentials: {
-              accessToken: {
-                ttl: 3600 // your custom TTL, in seconds, goes here
-              }
-            }
-          }
-        }
-      }));
 
 .. _Stormpath Admin Console: https://api.stormpath.com/login
 .. _Stormpath .NET SDK: https://docs.stormpath.com/csharp/product-guide/latest/

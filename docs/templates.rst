@@ -67,18 +67,18 @@ View models
 
 Each route has a view model class defined in the ``Stormpath.Owin.Abstractions.ViewModel`` namespace. If you are supplying your own views, use these models:
 
-+--------------------------------------------+---------------------------------------------------------------------+
-| **Route**                                  | **View Model**                                                      |
-+--------------------------------------------+---------------------------------------------------------------------+
-| :ref:`login`                               | ``Stormpath.Owin.Abstractions.ViewModel.ExtendedLoginViewModel``    |
-+--------------------------------------------+---------------------------------------------------------------------+
-| :ref:`registration`                        | ``Stormpath.Owin.Abstractions.ViewModel.ExtendedRegisterViewModel`` |
-+--------------------------------------------+---------------------------------------------------------------------+
-| :ref:`Forgot Password <password_reset>`    | ``Stormpath.Owin.Abstractions.ViewModel.ForgotPasswordViewModel``   |
-+--------------------------------------------+---------------------------------------------------------------------+
-| :ref:`Change Password <password_reset>`    | ``Stormpath.Owin.Abstractions.ViewModel.ChangePasswordViewModel``   |
-+--------------------------------------------+---------------------------------------------------------------------+
-| :ref:`email_verification`                  | ``Stormpath.Owin.Abstractions.ViewModel.VerifyEmailViewModel``      |
-+--------------------------------------------+---------------------------------------------------------------------+
++--------------------------------------------+-----------------------------------------------------------------------+
+| **Route**                                  | **View Model**                                                        |
++--------------------------------------------+-----------------------------------------------------------------------+
+| :ref:`login`                               | ``Stormpath.Owin.Abstractions.ViewModel.LoginFormViewModel``          |
++--------------------------------------------+-----------------------------------------------------------------------+
+| :ref:`registration`                        | ``Stormpath.Owin.Abstractions.ViewModel.RegisterFormViewModel``       |
++--------------------------------------------+-----------------------------------------------------------------------+
+| :ref:`Forgot Password <password_reset>`    | ``Stormpath.Owin.Abstractions.ViewModel.ForgotPasswordFormViewModel`` |
++--------------------------------------------+-----------------------------------------------------------------------+
+| :ref:`Change Password <password_reset>`    | ``Stormpath.Owin.Abstractions.ViewModel.ChangePasswordFormViewModel`` |
++--------------------------------------------+-----------------------------------------------------------------------+
+| :ref:`email_verification`                  | ``Stormpath.Owin.Abstractions.ViewModel.VerifyEmailFormViewModel``    |
++--------------------------------------------+-----------------------------------------------------------------------+
 
 .. _pre-built view templates: https://github.com/stormpath/stormpath-dotnet-owin-middleware/tree/master/src/Stormpath.Owin.Views

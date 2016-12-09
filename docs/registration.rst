@@ -84,6 +84,10 @@ The signature of the handler is a ``Func`` that accepts a ``PreRegistrationConte
 .. literalinclude:: code/registration/preregistration_handler_method.cs
     :language: csharp
 
+.. note::
+
+  New user accounts created through an external login mechanism (such as :ref:`social_login`) will trigger both the pre/post-registration handlers and the pre/post-login handlers.
+
 Targeting an Account Store
 ..........................
 
@@ -117,6 +121,10 @@ The signature of the handler is a ``Func`` that accepts a ``PostRegistrationCont
 
 .. literalinclude:: code/registration/postregistration_handler_method.cs
     :language: csharp
+
+.. note::
+
+  New user accounts created through an external login mechanism (such as :ref:`social_login`) will trigger both the pre/post-registration handlers and the pre/post-login handlers.
 
 Saving Custom Data for new Accounts
 ...................................

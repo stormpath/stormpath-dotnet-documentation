@@ -98,6 +98,10 @@ The signature of the handler is a ``Func`` that accepts a ``PreLoginContext`` an
 .. literalinclude:: code/login/prelogin_handler_method.cs
     :language: csharp
 
+.. note::
+
+  The handler will run regardless of the login mechanism. Logins through the :ref:`login` route, the :ref:`json_login_api`, :ref:`social_login`, and so on will all trigger the handler.
+
 Targeting an Account Store
 ..........................
 
@@ -135,6 +139,10 @@ The signature of the handler is a ``Func`` that accepts a ``PostLoginContext`` a
 
 .. literalinclude:: code/login/postlogin_handler_method.cs
     :language: csharp
+
+.. note::
+
+  The handler will run regardless of the login mechanism. Logins through the :ref:`login` route, the :ref:`json_login_api`, :ref:`social_login`, and so on will all trigger the handler.
 
 Modifying Custom Data on login
 ..............................

@@ -81,4 +81,4 @@ Each route has a view model class defined in the ``Stormpath.Owin.Abstractions.V
 | :ref:`email_verification`                  | ``Stormpath.Owin.Abstractions.ViewModel.VerifyEmailFormViewModel``    |
 +--------------------------------------------+-----------------------------------------------------------------------+
 
-.. _pre-built view templates: https://github.com/stormpath/stormpath-dotnet-owin-middleware/tree/master/src/Stormpath.Owin.Views
+.. _pre-built view templates: https://github.com/stormpath/stormpath-dotnet-owin-middleware/tree/master/src/Stormpath.Owin.Views/Views/Stormpath

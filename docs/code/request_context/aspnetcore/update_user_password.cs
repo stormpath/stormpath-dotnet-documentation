@@ -1,19 +1,19 @@
 public class UserModificationController : Controller
 {
-    private readonly Lazy<IAccount> account;
+    private readonly IAccount _account;
 
-    public UserModificationController(Lazy<IAccount> account)
+    public UserModificationController(Lazy<IAccount> lazyAccount)
     {
-        this.account = account;
+        _account = lazyAccount.Value;
     }
 
     [HttpPost]
     [Authorize]
     public async Task<IActionResult> UpdatePassword(string newPassword)
     {
-        if (account.Value != null)
+        if (_account != null)
         {
-            var stormpathAccount = account.Value;
+            var stormpathAccount = _account;
             stormpathAccount.SetPassword(newPassword);
             await stormpathAccount.SaveAsync();
         }

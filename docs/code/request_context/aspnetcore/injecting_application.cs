@@ -1,16 +1,16 @@
 public class AccountsController : Controller
 {
-    private readonly IApplication application;
+    private readonly IApplication _application;
 
     public AccountsController(IApplication application)
     {
-        this.application = application;
+        _application = application;
     }
 
     [HttpGet]
     public async Task<IActionResult> FindAccountByEmail(string email)
     {
-        var foundAccount = await application.GetAccounts()
+        var foundAccount = await _application.GetAccounts()
                  .Where(a => a.Email == email)
                  .SingleOrDefaultAsync();
 

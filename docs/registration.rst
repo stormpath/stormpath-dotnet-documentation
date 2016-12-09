@@ -59,6 +59,44 @@ You could also set this configuration via code:
 See the :ref:`configuration` section for more details on how configuration works, or :ref:`register_default_configuration` to see the default values for this route.
 
 
+Password strength requirements
+------------------------------
+
+Stormpath supports complex password strength rules, such as the number of letters or special characters required.  These settings are controlled on a per-Directory basis.
+
+If you want to modify the password strength rules for your application, use the `Stormpath Admin Console`_ to find the directory that is mapped to your application, and modify the associated password policy.
+
+For more information, see the `Account Password Strength Policy`_ section in the REST API documentation.
+
+
+Email verification
+------------------
+
+We **highly** recommend that you use email verification, as it adds an additional layer of security to your site (it makes it harder for bots to create spam accounts).
+
+Email verification will be automatically enabled if the Verification Email workflow is enabled on the Stormpath Directory linked to your application; see the :ref:`email_verification` section.
+
+
+.. _auto_login:
+
+Auto login
+----------
+
+After registering, the default behavior is to require the user to enter their new credentials to log in. If you want users to be automatically logged in after they register, use this configuration:
+
+.. code-block:: yaml
+
+  web:
+    register:
+      autoLogin: true
+      nextUri: "/"
+
+By default the ``nextUri`` is to ``/`` (the root page), but you can modify this to whatever destination you want.
+
+.. note::
+  The :ref:`email_verification` and :ref:`password_reset` features will observe this setting as well.
+
+
 Pre-registration handler
 ------------------------
 
@@ -298,44 +336,6 @@ Or, in code:
     :language: csharp
 
 Any visible fields that are omitted from the ``fieldOrder`` array will be placed at the end of the form.
-
-
-Password strength requirements
-------------------------------
-
-Stormpath supports complex password strength rules, such as the number of letters or special characters required.  These settings are controlled on a per-Directory basis.
-
-If you want to modify the password strength rules for your application, use the `Stormpath Admin Console`_ to find the directory that is mapped to your application, and modify the associated password policy.
-
-For more information, see the `Account Password Strength Policy`_ section in the REST API documentation.
-
-
-Email verification
-------------------
-
-We **highly** recommend that you use email verification, as it adds an additional layer of security to your site (it makes it harder for bots to create spam accounts).
-
-Email verification will be automatically enabled if the Verification Email workflow is enabled on the Stormpath Directory linked to your application; see the :ref:`email_verification` section.
-
-
-.. _auto_login:
-
-Auto login
-----------
-
-After registering, the default behavior is to require the user to enter their new credentials to log in. If you want users to be automatically logged in after they register, use this configuration:
-
-.. code-block:: yaml
-
-  web:
-    register:
-      autoLogin: true
-      nextUri: "/"
-
-By default the ``nextUri`` is to ``/`` (the root page), but you can modify this to whatever destination you want.
-
-.. note::
-  The :ref:`email_verification` and :ref:`password_reset` features will observe this setting as well.
 
 
 .. _json_registration_api:

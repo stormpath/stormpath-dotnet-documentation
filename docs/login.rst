@@ -61,6 +61,62 @@ You could also set this configuration via code:
 See the :ref:`configuration` section for more details on how configuration works, or :ref:`login_default_configuration` to see the default values for this route.
 
 
+Next URI
+--------
+
+If the login attempt is successful, the user will be redirected to ``/`` by default. If you want to change this, set the ``nextUri`` option:
+
+.. code-block:: yaml
+
+  web:
+    login:
+      nextUri: "/dashboard"
+
+
+Pre-login handler
+-----------------
+
+If you need to run code before a login attempt is sent to Stormpath, you can attach a pre-login handler when you configure the Stormpath middleware:
+
+.. only:: aspnet
+
+  .. literalinclude:: code/login/aspnet/prelogin_handler.cs
+      :language: csharp
+
+.. only:: aspnetcore
+
+  .. literalinclude:: code/login/aspnetcore/prelogin_handler.cs
+      :language: csharp
+
+.. only:: nancy
+
+  .. .literalinclude:: code/login/nancy/prelogin_handler.cs
+      :language: csharp
+
+The signature of the handler is a ``Func`` that accepts ``PreLoginContext`` and ``CancellationToken``, and returns a ``Task``. It can be declared as a method instead of with lambda syntax:
+
+.. literalinclude:: code/login/prelogin_handler_method.cs
+    :language: csharp
+
+Targeting an Account Store
+..........................
+
+One use for the pre-login handler is to target a specific Account Store or Organization during login:
+
+.. literalinclude:: code/login/prelogin_target_dir.cs
+    :language: csharp
+
+.. note::
+
+  For more information about how targeting an Account Store works, see the `token generation section <https://docs.stormpath.com/rest/product-guide/latest/auth_n.html#generating-an-oauth-2-0-access-token>`_ of the Product Guide.
+
+
+Post-login handler
+------------------
+
+TODO
+
+
 .. _login_customizing_form:
 
 Customizing the form
@@ -113,18 +169,6 @@ Or, through code:
 
 .. note::
   If you want to go beyond customizing the fields on the form, see :ref:`templates`.
-
-
-Next URI
---------
-
-If the login attempt is successful, the user will be redirected to ``/`` by default. If you want to change this, set the ``nextUri`` option:
-
-.. code-block:: yaml
-
-  web:
-    login:
-      nextUri: "/dashboard"
 
 
 .. todo::
